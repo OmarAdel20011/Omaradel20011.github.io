@@ -1,0 +1,1662 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>PitchPass UAE - Football Field Booking</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&amp;family=Cairo:wght@600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body { box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; }
+    .gradient-bg { background: linear-gradient(135deg, #064e3b 0%, #047857 100%); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .btn-primary { background: #059669; transition: all 0.2s; }
+    .btn-primary:hover { background: #047857; transform: scale(1.02); }
+    .btn-secondary { background: #e5e7eb; color: #374151; transition: all 0.2s; }
+    .btn-secondary:hover { background: #d1d5db; }
+    .lang-btn { padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+    .lang-btn.active { background: #059669; color: white; }
+    .lang-btn:not(.active) { background: rgba(255,255,255,0.2); color: white; cursor: pointer; }
+    .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .slot-available { background: #d1fae5; border: 1px solid #6ee7b7; }
+    .slot-booked { background: #fee2e2; border: 1px solid #fca5a5; }
+    .slot-selected { background: #059669; color: white; border: 1px solid #047857; }
+    .loading-spinner { border: 3px solid #e5e7eb; border-top: 3px solid #059669; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .toast { animation: slideIn 0.3s ease-out; }
+    @keyframes slideIn { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    input:focus, select:focus, textarea:focus { outline: none; ring: 2px; ring-color: #10b981; }
+    .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="bg-slate-50 text-slate-800 w-full h-full overflow-auto">
+  <div id="app" class="w-full"></div>
+  <script>
+    // =====================================================
+    // PitchPass UAE - Production Ready App
+    // =====================================================
+
+    let currentLanguage = 'en';
+    let currentPage = 'landing';
+    
+    // Add float animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+    `;
+    document.head.appendChild(style);
+    let currentUser = null;
+    let appData = {
+      users: [],
+      fields: [],
+      slots: [],
+      bookings: [],
+      reviews: [],
+      promoCodes: [],
+      payments: []
+    };
+
+    // Translations - All in proper UTF-8 format
+    const translations = {
+      en: {
+        appTitle: 'PitchPass UAE',
+        tagline: 'Book Your Perfect Pitch',
+        findFields: 'Find & Book Football Fields Across All 7 Emirates',
+        description: '5-a-side to full pitch • Instant booking • Best prices',
+        search: 'Search Fields',
+        browse: 'Browse Fields',
+        home: 'Home',
+        fields: 'Fields',
+        myBookings: 'My Bookings',
+        dashboard: 'Dashboard',
+        admin: 'Admin',
+        login: 'Login',
+        signup: 'Sign Up',
+        logout: 'Logout',
+        email: 'Email',
+        password: 'Password',
+        demoPasscode: 'Demo Passcode',
+        demoPasscodeHint: 'This is a demo. Do not use real credentials.',
+        name: 'Full Name',
+        phone: 'Phone',
+        iAm: 'I am a',
+        player: 'Player - Book fields',
+        owner: 'Field Owner - List fields',
+        selectEmirate: 'Select Emirate',
+        selectArea: 'Select Area',
+        selectDate: 'Select Date',
+        selectDuration: 'Duration',
+        book: 'Book Now',
+        bookingConfirmed: 'Booking Confirmed! 🎉',
+        bookingCancelled: 'Booking Cancelled',
+        price: 'Price',
+        commission: '5% Commission',
+        total: 'Total',
+        checkout: 'Checkout',
+        payNow: 'Pay Now',
+        QRCode: 'Your Booking QR Code',
+        bookingID: 'Booking ID',
+        fieldName: 'Field Name',
+        date: 'Date',
+        time: 'Time',
+        upcomingBookings: 'Upcoming Bookings',
+        pastBookings: 'Past Bookings',
+        noBookings: 'No bookings yet',
+        startBooking: 'Start booking your first field!',
+        myFields: 'My Fields',
+        addField: 'Add New Field',
+        fieldNameRequired: 'Field Name',
+        emirateRequired: 'Emirate',
+        areaRequired: 'Area',
+        addressRequired: 'Address',
+        pitchSizeRequired: 'Pitch Size',
+        basePriceRequired: 'Base Price (AED)',
+        description: 'Description',
+        rules: 'Rules',
+        submit: 'Submit for Approval',
+        approvalPending: 'Pending Approval',
+        approved: 'Approved',
+        active: 'Active',
+        inactive: 'Inactive',
+        earnings: 'Earnings',
+        pendingPayout: 'Pending Payout',
+        adminPanel: 'Admin Panel',
+        approveFields: 'Approve Fields',
+        approveOwners: 'Approve Owners',
+        manageDisputes: 'Manage Disputes',
+        analytics: 'Analytics',
+        totalBookings: 'Total Bookings',
+        revenue: 'Revenue',
+        demoMode: '⚠️ DEMO MODE - Demo payment system',
+        emirateName: 'Emirate',
+        areaName: 'Area',
+        durationMin: 'minutes',
+        ratingStars: 'Rating',
+        reviewsCount: 'Reviews',
+        amenities: 'Amenities',
+        turf: 'Turf Type',
+        indoor: 'Indoor',
+        outdoor: 'Outdoor',
+        selectSlots: 'Select time slots',
+        confirm: 'Confirm',
+        cancel: 'Cancel',
+        delete: 'Delete',
+        edit: 'Edit',
+        save: 'Save',
+        close: 'Close',
+        loading: 'Loading...',
+        error: 'Error',
+        success: 'Success',
+        welcome: 'Welcome',
+        dontHaveAccount: "Don't have an account?",
+        haveAccount: 'Already have an account?',
+        signUp: 'Sign Up',
+        signIn: 'Sign In',
+        welcome_message: 'Welcome to PitchPass UAE! 🎉',
+        bookField: 'Book This Field',
+        viewDetails: 'View Details',
+        back: 'Back',
+        forOwners: 'For Field Owners',
+        support: 'Support',
+        about: 'About',
+        terms: 'Terms',
+        copyright: '© 2025 PitchPass UAE. All rights reserved.',
+        noFields: 'No fields available',
+        hour: 'per hour',
+        showQRCode: 'Show this code at the venue'
+      },
+      ar: {
+        appTitle: 'بيتش باص',
+        tagline: 'احجز ملعبك المثالي',
+        findFields: 'ابحث واحجز ملاعب كرة قدم في جم���ع أنحاء الإمارات السبع',
+        description: 'من 5 ضد 5 إلى الملاعب ��لكاملة • حجز فوري • أفضل الأسعار',
+        search: 'البحث عن الملاعب',
+        browse: 'تصفح الملاعب',
+        home: 'الرئيسية',
+        fields: 'الملاعب',
+        myBookings: 'حجوزاتي',
+        dashboard: 'ل��حة ال��حكم',
+        admin: 'الإدارة',
+        login: 'تسجيل الدخول',
+        signup: 'إنشاء حساب',
+        logout: 'تسجيل الخروج',
+        email: 'البريد الإلكتروني',
+        password: 'كلمة المرور',
+        demoPasscode: 'رمز الديمو',
+        demoPasscodeHint: 'هذا عرض توضيحي. لا تستخ����م بيانات حقيقية.',
+        name: 'الاسم الكامل',
+        phone: 'رقم الهاتف',
+        iAm: 'أنا',
+        player: 'لاعب - احجز ملاعب',
+        owner: 'مالك مل��ب - أدرج ملاعبك',
+        selectEmirate: 'اختر إمارة',
+        selectArea: 'اختر منطقة',
+        selectDate: 'اختر التاريخ',
+        selectDuration: 'المدة',
+        book: 'احجز الآن',
+        bookingConfirmed: 'تم تأكيد الحجز! 🎉',
+        bookingCancelled: 'تم إلغاء الحجز',
+        price: 'السعر',
+        commission: 'عمولة 5%',
+        total: 'المجموع',
+        checkout: 'الدفع',
+        payNow: 'ادفع الآن',
+        QRCode: 'رمز QR للحجز',
+        bookingID: 'معرف الحجز',
+        fieldName: 'اسم الملعب',
+        date: 'التاريخ',
+        time: 'الوقت',
+        upcomingBookings: 'الحجوزات القادمة',
+        pastBookings: 'الحجوزات السابقة',
+        noBookings: 'لا توجد حجوزات',
+        startBooking: 'ابدأ بحجز ملعبك الأول!',
+        myFields: 'ملاعبي',
+        addField: 'إضافة ملعب جديد',
+        fieldNameRequired: 'اسم الملعب',
+        emirateRequired: 'الإمارة',
+        areaRequired: 'المنطقة',
+        addressRequired: 'العنوان',
+        pitchSizeRequired: 'حجم الملعب',
+        basePriceRequired: 'السعر الأساسي (درهم)',
+        description: 'الوصف',
+        rules: 'القواعد',
+        submit: 'إرسال للموافقة',
+        approvalPending: 'قيد الانتظار',
+        approved: 'موافق عليه',
+        active: 'نشط',
+        inactive: 'غير نشط',
+        earnings: 'الأرباح',
+        pendingPayout: 'الدفع المعلق',
+        adminPanel: 'لوحة الإدارة',
+        approveFields: 'الموافقة على الملاعب',
+        approveOwners: 'الموافقة على المالكين',
+        manageDisputes: 'إدارة النزاعات',
+        analytics: 'التحليلات',
+        totalBookings: 'إجمالي الحجوزات',
+        revenue: 'الإيرادات',
+        demoMode: '⚠️ وضع العرض التوضيحي - نظام دفع ��وضيحي',
+        emirateName: 'الإما��ة',
+        areaName: 'المنطقة',
+        durationMin: 'دقيقة',
+        ratingStars: 'التقييم',
+        reviewsCount: 'التعليقات',
+        amenities: 'المرافق',
+        turf: 'نوع العشب',
+        indoor: 'داخلي',
+        outdoor: 'خارجي',
+        selectSlots: 'اختر فترات زمنية',
+        confirm: 'تأكيد',
+        cancel: 'إلغاء',
+        delete: 'حذف',
+        edit: 'تعديل',
+        save: 'حفظ',
+        close: 'إغلاق',
+        loading: 'جاري التحميل...',
+        error: 'خطأ',
+        success: 'نجح',
+        welcome: 'أهلا وسهلا',
+        dontHaveAccount: 'ليس لديك حساب؟',
+        haveAccount: 'هل لديك حساب بالفعل؟',
+        signUp: 'إنشاء حساب',
+        signIn: 'تسجيل الدخول',
+        welcome_message: 'مرحبا بك في بيتش باص! 🎉',
+        bookField: 'احجز هذا الملعب',
+        viewDetails: 'عرض التفاصيل',
+        back: 'رجوع',
+        forOwners: 'لأصحا�� الملاعب',
+        support: 'الدعم',
+        about: 'حول',
+        terms: 'الشروط',
+        copyright: '© 2025 بيتش باص. جميع الحقوق محفوظة.',
+        noFields: 'لا توجد ملاعب متاحة',
+        hour: 'في الساعة',
+        showQRCode: 'عرض هذا الرمز في الملعب'
+      },
+      ur: {
+        appTitle: 'پچ پاس',
+        tagline: 'اپنا بہترین میدان بک کریں',
+        findFields: 'تمام 7 امارات میں فٹ بال کے میدان تلاش اور بک کریں',
+        description: '5 کے مقابلے 5 سے مکمل میدان تک • فوری بکنگ • بہترین قیمتیں',
+        search: 'میدان تلاش کریں',
+        browse: 'میدان براؤز کریں',
+        home: 'صفحہ ہوم',
+        fields: 'میدان',
+        myBookings: 'میری بکنگ',
+        dashboard: 'ڈیش بورڈ',
+        admin: 'انتظامیہ',
+        login: 'لا�� ان',
+        signup: 'سائن ا��',
+        logout: 'لاگ آؤٹ',
+        email: 'ای میل',
+        password: 'پاس ورڈ',
+        demoPasscode: 'ڈیمو پاس کوڈ',
+        demoPasscodeHint: 'یہ ایک ڈیمو ہے۔ حقیقی اعتبارات استعمال نہ کریں۔',
+        name: 'مکمل نام',
+        phone: 'فون نمبر',
+        iAm: 'میں ہوں',
+        player: 'کھلاڑی - میدان بک کریں',
+        owner: 'میدان کا مالک - اپنے میدان درج کریں',
+        selectEmirate: 'امارہ منتخب کریں',
+        selectArea: 'علاقہ منتخب کریں',
+        selectDate: 'تار��خ منتخب کریں',
+        selectDuration: 'مدت',
+        book: 'ابھی بک کریں',
+        bookingConfirmed: 'بکنگ تصدیق شدہ! 🎉',
+        bookingCancelled: 'بکنگ منسوخ',
+        price: 'قیمت',
+        commission: '5% کمیشن',
+        total: 'کل',
+        checkout: 'چیک آؤٹ',
+        payNow: 'اب ��دا کریں',
+        QRCode: 'بکنگ QR کوڈ',
+        bookingID: 'بکنگ ID',
+        fieldName: 'میدان کا نام',
+        date: 'تاریخ',
+        time: 'وقت',
+        upcomingBookings: 'آنے والی بکنگ',
+        pastBookings: 'ماضی کی بکنگ',
+        noBookings: 'کوئی بکنگ نہیں',
+        startBooking: 'اپنی پہلی بکنگ شروع کریں!',
+        myFields: 'میرے میدان',
+        addField: 'نیا میدان شامل کریں',
+        fieldNameRequired: 'میدان ���� نام',
+        emirateRequired: 'امارہ',
+        areaRequired: 'علاقہ',
+        addressRequired: 'پتہ',
+        pitchSizeRequired: 'میدان کا سائز',
+        basePriceRequired: 'بنیادی قیمت (درہم)',
+        description: 'تفصیل',
+        rules: 'اصول',
+        submit: 'منظوری کے لیے جمع کریں',
+        approvalPending: 'زیر التوا',
+        approved: 'منظور',
+        active: 'فعال',
+        inactive: 'غیر فعال',
+        earnings: 'کمائی',
+        pendingPayout: 'زیر التوا ادائیگی',
+        adminPanel: 'انتظامی پینل',
+        approveFields: 'میدان کی منظوری',
+        approveOwners: 'مالکین کی منظوری',
+        manageDisputes: 'تنازعات کا انتظام',
+        analytics: 'تجزیات',
+        totalBookings: 'کل بکنگز',
+        revenue: 'آمدنی',
+        demoMode: '⚠️ ڈیمو مو�� - ڈیمو ادائیگی کا نظ��م',
+        emirateName: 'امارہ',
+        areaName: 'علاقہ',
+        durationMin: 'منٹ',
+        ratingStars: 'ریٹنگ',
+        reviewsCount: 'جائزے',
+        amenities: 'سہولیات',
+        turf: 'گھاس کی قسم',
+        indoor: '��ندرونی',
+        outdoor: 'بیرونی',
+        selectSlots: 'وقت کے سلاٹ منتخب کریں',
+        confirm: 'تصدیق',
+        cancel: 'منسوخ',
+        delete: 'حذف',
+        edit: 'ترمیم',
+        save: 'محفوظ کریں',
+        close: 'بند کریں',
+        loading: 'لوڈ ہو رہا ہے...',
+        error: 'خرابی',
+        success: 'کامیاب',
+        welcome: 'خوش آمدید',
+        dontHaveAccount: 'کیا آپ کے پاس حساب نہیں ہے؟',
+        haveAccount: 'کیا آپ کے پاس پہلے سے حساب ہے؟',
+        signUp: 'سائن اپ',
+        signIn: 'سائن ان',
+        welcome_message: 'پچ پاس میں خوش آم��ید! 🎉',
+        bookField: 'اس میدان کو بک کریں',
+        viewDetails: 'تفصیلات دیکھیں',
+        back: 'واپس',
+        forOwners: '��یدان کے مالکین کے لیے',
+        support: '��پورٹ',
+        about: 'کے بارے م��ں',
+        terms: 'شرائط',
+        copyright: '© 2025 پچ پاس۔ تمام حقوق محفوظ ہیں۔',
+        noFields: 'کوئی میدان ��ستیاب نہیں',
+        hour: 'فی گھنٹہ',
+        showQRCode: 'یہ کوڈ ملعب میں دکھائیں'
+      }
+    };
+
+    function t(key) {
+      return translations[currentLanguage]?.[key] || key;
+    }
+
+    // UAE Data
+    const uaeData = {
+      'Abu Dhabi': ['Al Reem Island', 'Khalifa City', 'Al Mushrif', 'Yas Island', 'Al Ain'],
+      'Dubai': ['Al Quoz', 'Sports City', 'JLT', 'Al Barsha', 'Dubai Marina'],
+      'Sharjah': ['Al Nahda', 'Al Majaz', 'Industrial Area', 'Al Khan'],
+      'Ajman': ['Al Nuaimiya', 'Al Rashidiya', 'Emirates City'],
+      'Ras Al Khaimah': ['Al Nakheel', 'Al Hamra', 'Khuzam'],
+      'Fujairah': ['Al Faseel', 'Dibba', 'Masafi'],
+      'Umm Al Quwain': ['Old Town', 'Al Salamah', 'Al Raas']
+    };
+
+    // Pitch illustration SVGs
+    function generatePitchSVG(type) {
+      const pitches = {
+        1: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="grass1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#22c55e;stop-opacity:1"/><stop offset="100%" style="stop-color:#16a34a;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#grass1)"/><line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="2"/><rect x="20" y="50" width="60" height="100" fill="none" stroke="white" stroke-width="2"/><rect x="220" y="50" width="60" height="100" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="25" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="3" fill="white"/></svg>`,
+        2: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="turf2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#10b981;stop-opacity:1"/><stop offset="100%" style="stop-color:#047857;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#turf2)"/><line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="2"/><rect x="15" y="60" width="50" height="80" fill="none" stroke="white" stroke-width="1.5"/><rect x="235" y="60" width="50" height="80" fill="none" stroke="white" stroke-width="1.5"/><rect x="140" y="40" width="20" height="120" fill="none" stroke="white" stroke-width="1"/></svg>`,
+        3: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><pattern id="grid3" width="10" height="10"><rect width="10" height="10" fill="#059669"/><path d="M 10 0 L 0 10 M 0 0 L 10 10" stroke="#10b981" stroke-width="0.5"/></pattern></defs><rect width="300" height="200" fill="url(#grid3)"/><line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="2.5"/><circle cx="50" cy="100" r="20" fill="none" stroke="white" stroke-width="2"/><circle cx="250" cy="100" r="20" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="30" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="4" fill="white"/></svg>`,
+        4: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="bright4" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#34d399;stop-opacity:1"/><stop offset="100%" style="stop-color:#10b981;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#bright4)"/><line x1="150" y1="10" x2="150" y2="190" stroke="white" stroke-width="2"/><line x1="30" y1="10" x2="30" y2="190" stroke="white" stroke-width="1"/><line x1="270" y1="10" x2="270" y2="190" stroke="white" stroke-width="1"/><rect x="10" y="50" width="40" height="100" fill="none" stroke="white" stroke-width="1.5"/><rect x="250" y="50" width="40" height="100" fill="none" stroke="white" stroke-width="1.5"/></svg>`,
+        5: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="hybrid5" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:0.3"/><stop offset="100%" style="stop-color:#16a34a;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#hybrid5)"/><line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="2"/><rect x="25" y="60" width="50" height="80" fill="none" stroke="white" stroke-width="2"/><rect x="225" y="60" width="50" height="80" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="20" fill="none" stroke="white" stroke-width="1.5"/><circle cx="150" cy="100" r="2" fill="white"/></svg>`,
+        6: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="natural6" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#22d3ee;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#1ea849;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#natural6)"/><line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="2"/><line x1="75" y1="0" x2="75" y2="200" stroke="white" stroke-width="1" stroke-dasharray="5"/><line x1="225" y1="0" x2="225" y2="200" stroke="white" stroke-width="1" stroke-dasharray="5"/><rect x="15" y="40" width="70" height="120" fill="none" stroke="white" stroke-width="2"/><rect x="215" y="40" width="70" height="120" fill="none" stroke="white" stroke-width="2"/></svg>`,
+        7: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="evening7" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.3"/><stop offset="100%" style="stop-color:#059669;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#evening7)"/><line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="2"/><rect x="20" y="50" width="60" height="100" fill="none" stroke="white" stroke-width="2"/><rect x="220" y="50" width="60" height="100" fill="none" stroke="white" stroke-width="2"/><rect x="130" y="80" width="40" height="40" fill="none" stroke="white" stroke-width="1"/></svg>`,
+        8: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="community8" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#0f766e;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#community8)"/><line x1="150" y1="20" x2="150" y2="180" stroke="white" stroke-width="2"/><circle cx="75" cy="100" r="25" fill="none" stroke="white" stroke-width="1.5"/><circle cx="225" cy="100" r="25" fill="none" stroke="white" stroke-width="1.5"/><rect x="130" y="75" width="40" height="50" fill="none" stroke="white" stroke-width="1"/></svg>`,
+        9: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="premium9" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.2"/><stop offset="100%" style="stop-color:#15803d;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#premium9)"/><line x1="150" y1="10" x2="150" y2="190" stroke="white" stroke-width="2.5"/><rect x="30" y="60" width="40" height="80" fill="none" stroke="white" stroke-width="2"/><rect x="230" y="60" width="40" height="80" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="25" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="5" fill="white"/></svg>`,
+        10: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><defs><linearGradient id="oasis10" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.3"/><stop offset="100%" style="stop-color:#22863a;stop-opacity:1"/></linearGradient></defs><rect width="300" height="200" fill="url(#oasis10)"/><line x1="150" y1="0" x2="150" y2="200" stroke="white" stroke-width="2.5"/><rect x="15" y="45" width="70" height="110" fill="none" stroke="white" stroke-width="2"/><rect x="215" y="45" width="70" height="110" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="35" fill="none" stroke="white" stroke-width="2"/><circle cx="150" cy="100" r="5" fill="white"/></svg>`
+      };
+      return pitches[type] || pitches[1];
+    }
+
+    // Seed Fields
+    const seedFields = [
+      { type: 'field', id: 'f1', fieldName: 'Emirates Arena', emirate: 'Dubai', area: 'Sports City', address: 'Dubai Sports City', latitude: 25.0478, longitude: 55.2161, pitchSvg: 1, amenities: 'Parking,Changing Rooms,Showers,Cafeteria', pitchSize: '11v11', indoor: false, turfType: 'Natural Grass', basePrice: 800, ownerId: 'owner1', active: true, approved: true, description: 'Premium full-size field', rules: 'No metal studs', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f2', fieldName: 'Al Quoz Sports Hub', emirate: 'Dubai', area: 'Al Quoz', address: 'Al Quoz Industrial', latitude: 25.1381, longitude: 55.2367, pitchSvg: 2, amenities: 'Parking,Floodlights', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 450, ownerId: 'owner1', active: true, approved: true, description: 'Modern 7-a-side pitch', rules: 'No loud music', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f3', fieldName: 'Capital Football Center', emirate: 'Abu Dhabi', area: 'Khalifa City', address: 'Khalifa City A', latitude: 24.4284, longitude: 54.5767, pitchSvg: 3, amenities: 'Parking,Showers,Cafeteria', pitchSize: '11v11', indoor: false, turfType: 'Hybrid', basePrice: 900, ownerId: 'owner2', active: true, approved: true, description: 'State-of-the-art facility', rules: 'Professional conduct', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f4', fieldName: 'Indoor Arena Sharjah', emirate: 'Sharjah', area: 'Al Nahda', address: 'Al Nahda Street', latitude: 25.3134, longitude: 55.3765, pitchSvg: 4, amenities: 'Parking,AC,Showers', pitchSize: '5v5', indoor: true, turfType: 'Artificial Turf', basePrice: 350, ownerId: 'owner3', active: true, approved: true, description: 'Climate-controlled facility', rules: 'Indoor shoes only', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f5', fieldName: 'Ajman Sports Complex', emirate: 'Ajman', area: 'Al Nuaimiya', address: 'Al Nuaimiya', latitude: 25.4052, longitude: 55.4437, pitchSvg: 5, amenities: 'Parking,Floodlights', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 300, ownerId: 'owner4', active: true, approved: true, description: 'Family-friendly pitch', rules: 'Safe environment', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f6', fieldName: 'RAK Football Village', emirate: 'Ras Al Khaimah', area: 'Al Hamra', address: 'Al Hamra Village', latitude: 25.6836, longitude: 55.7883, pitchSvg: 6, amenities: 'Parking,Showers,Cafeteria', pitchSize: '11v11', indoor: false, turfType: 'Natural Grass', basePrice: 600, ownerId: 'owner5', active: true, approved: true, description: 'Beachside location', rules: 'Respect wildlife', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f7', fieldName: 'Fujairah FC Ground', emirate: 'Fujairah', area: 'Al Faseel', address: 'Al Faseel Road', latitude: 25.1288, longitude: 56.3266, pitchSvg: 7, amenities: 'Parking,Floodlights,First Aid', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 280, ownerId: 'owner6', active: true, approved: true, description: 'Mountain backdrop', rules: 'Check weather', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f8', fieldName: 'UAQ Community Pitch', emirate: 'Umm Al Quwain', area: 'Old Town', address: 'Old Town', latitude: 25.5647, longitude: 55.5533, pitchSvg: 8, amenities: 'Parking,Water Cooler', pitchSize: '5v5', indoor: false, turfType: 'Artificial Turf', basePrice: 200, ownerId: 'owner7', active: true, approved: true, description: 'Community pitch', rules: 'Respect others', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f9', fieldName: 'Marina Sports Lounge', emirate: 'Dubai', area: 'Dubai Marina', address: 'Dubai Marina Walk', latitude: 25.0805, longitude: 55.1403, pitchSvg: 9, amenities: 'Parking,Showers,Cafeteria,AC', pitchSize: '5v5', indoor: true, turfType: 'Artificial Turf', basePrice: 500, ownerId: 'owner1', active: true, approved: true, description: 'Premium facility with marina views', rules: 'Advance booking required', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f10', fieldName: 'Al Ain Oasis Arena', emirate: 'Abu Dhabi', area: 'Al Ain', address: 'Al Ain City Center', latitude: 24.2075, longitude: 55.7447, pitchSvg: 10, amenities: 'Parking,Showers,Cafeteria,Floodlights', pitchSize: '11v11', indoor: false, turfType: 'Natural Grass', basePrice: 550, ownerId: 'owner2', active: true, approved: true, description: 'Beautiful green setting', rules: 'No plastic bottles', createdAt: new Date().toISOString() }
+    ];
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        appData.users = data.filter(d => d.type === 'user');
+        appData.fields = data.filter(d => d.type === 'field');
+        appData.slots = data.filter(d => d.type === 'availabilitySlot');
+        appData.bookings = data.filter(d => d.type === 'booking');
+        appData.reviews = data.filter(d => d.type === 'review');
+        appData.promoCodes = data.filter(d => d.type === 'promoCode');
+        appData.payments = data.filter(d => d.type === 'payment');
+        
+        const savedUserId = localStorage.getItem('pitchpass_user');
+        if (savedUserId) {
+          currentUser = appData.users.find(u => u.id === savedUserId);
+        }
+        
+        render();
+      }
+    };
+
+    function generateId() {
+      return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+
+    function calculateEndTime(startTime, durationMinutes) {
+      if (!startTime) return '';
+      const [hours, minutes] = startTime.split(':').map(Number);
+      const totalMinutes = hours * 60 + minutes + parseInt(durationMinutes);
+      const endHours = Math.floor(totalMinutes / 60) % 24;
+      const endMinutes = totalMinutes % 60;
+      return `${String(endHours).padStart(2, '0')}:${String(endMinutes).padStart(2, '0')}`;
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      const bgColor = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-red-500' : 'bg-amber-500';
+      toast.className = `fixed bottom-4 right-4 px-6 py-3 rounded-xl shadow-lg z-50 toast text-white ${bgColor}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    async function saveRecord(record) {
+      if (!window.dataSdk) {
+        appData[record.type === 'user' ? 'users' : record.type === 'field' ? 'fields' : record.type === 'booking' ? 'bookings' : record.type === 'review' ? 'reviews' : record.type === 'availabilitySlot' ? 'slots' : 'promoCodes'].push(record);
+        return true;
+      }
+      const result = await window.dataSdk.create(record);
+      if (!result.isOk) {
+        showToast(t('error'), 'error');
+        return false;
+      }
+      return true;
+    }
+
+    async function updateRecord(record) {
+      if (!window.dataSdk) return true;
+      const result = await window.dataSdk.update(record);
+      if (!result.isOk) {
+        showToast(t('error'), 'error');
+        return false;
+      }
+      return true;
+    }
+
+    async function deleteRecord(record) {
+      if (!window.dataSdk) return true;
+      const result = await window.dataSdk.delete(record);
+      if (!result.isOk) {
+        showToast(t('error'), 'error');
+        return false;
+      }
+      return true;
+    }
+
+    // Authentication
+    async function handleSignup(e) {
+      e.preventDefault();
+      const form = e.target;
+      const name = form.querySelector('[name="name"]').value;
+      const email = form.querySelector('[name="email"]').value.toLowerCase();
+      const password = form.querySelector('[name="password"]').value;
+      const phone = form.querySelector('[name="phone"]').value;
+      const role = form.querySelector('[name="role"]').value;
+
+      if (appData.users.find(u => u.email === email)) {
+        showToast('Email already registered', 'error');
+        return;
+      }
+
+      const user = {
+        type: 'user',
+        id: generateId(),
+        name,
+        email,
+        password,
+        phone,
+        role,
+        createdAt: new Date().toISOString()
+      };
+
+      const success = await saveRecord(user);
+      if (success) {
+        currentUser = user;
+        localStorage.setItem('pitchpass_user', user.id);
+        showToast(t('welcome_message'));
+        currentPage = role === 'owner' ? 'owner-dashboard' : 'landing';
+        render();
+      }
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.querySelector('[name="email"]').value.toLowerCase();
+      const password = form.querySelector('[name="password"]').value;
+
+      const user = appData.users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        currentUser = user;
+        localStorage.setItem('pitchpass_user', user.id);
+        showToast(t('welcome') + ', ' + user.name);
+        currentPage = user.role === 'admin' ? 'admin-dashboard' : user.role === 'owner' ? 'owner-dashboard' : 'landing';
+        render();
+      } else {
+        showToast('Invalid email or password', 'error');
+      }
+    }
+
+    function handleLogout() {
+      currentUser = null;
+      localStorage.removeItem('pitchpass_user');
+      currentPage = 'landing';
+      showToast('Logged out successfully');
+      render();
+    }
+
+    // Generate time slots
+    function generateSlots(fieldId, date) {
+      const slots = [];
+      const hours = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+      
+      hours.forEach((hour, index) => {
+        if (index < hours.length - 1) {
+          const slotId = `${fieldId}_${date}_${hour}`;
+          if (!appData.slots.find(s => s.id === slotId)) {
+            slots.push({
+              type: 'availabilitySlot',
+              id: slotId,
+              fieldId: fieldId,
+              date: date,
+              startTime: hour,
+              endTime: hours[index + 1],
+              status: 'available',
+              createdAt: new Date().toISOString()
+            });
+          }
+        }
+      });
+      return slots;
+    }
+
+    // Generate QR Code (Simple SVG)
+    function generateQRCode(text) {
+      const size = 120;
+      const moduleCount = 21;
+      const moduleSize = size / moduleCount;
+      
+      let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
+      svg += `<rect width="${size}" height="${size}" fill="white"/>`;
+      
+      const hash = text.split('').reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0);
+      
+      for (let y = 0; y < moduleCount; y++) {
+        for (let x = 0; x < moduleCount; x++) {
+          if (((hash * (x + 1) * (y + 1) * 7) % 100) > 45) {
+            svg += `<rect x="${x * moduleSize}" y="${y * moduleSize}" width="${moduleSize}" height="${moduleSize}" fill="#064e3b"/>`;
+          }
+        }
+      }
+      
+      svg += '</svg>';
+      return svg;
+    }
+
+    // Render functions
+    function renderHeader() {
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      return `
+        <header class="gradient-bg text-white sticky top-0 z-40" dir="${dir}">
+          <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="currentPage='landing';render()">
+              <div class="text-center">
+                <h1 class="font-bold text-lg leading-tight">HajzKoora</h1>
+                <p class="text-xs text-emerald-200 leading-tight">حجز كوره</p>
+              </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-6 text-sm">
+              <button onclick="currentPage='landing';render()" class="hover:text-emerald-200">${t('home')}</button>
+              <button onclick="currentPage='fields';render()" class="hover:text-emerald-200">${t('fields')}</button>
+              ${currentUser ? `<button onclick="currentPage='my-bookings';render()" class="hover:text-emerald-200">${t('myBookings')}</button>` : ''}
+            </nav>
+
+            <div class="flex items-center gap-2">
+              <button onclick="currentLanguage='en';document.documentElement.dir='ltr';render()" class="lang-btn ${currentLanguage === 'en' ? 'active' : ''}">EN</button>
+              <button onclick="currentLanguage='ar';document.documentElement.dir='rtl';render()" class="lang-btn ${currentLanguage === 'ar' ? 'active' : ''}">AR</button>
+              <button onclick="currentLanguage='ur';document.documentElement.dir='rtl';render()" class="lang-btn ${currentLanguage === 'ur' ? 'active' : ''}">UR</button>
+
+              ${currentUser ? `
+                <div class="flex items-center gap-2 ml-2">
+                  <span class="text-sm hidden sm:inline">${currentUser.name}</span>
+                  ${currentUser.role === 'owner' ? `<button onclick="currentPage='owner-dashboard';render()" class="text-xs bg-white/20 px-2 py-1 rounded">${t('dashboard')}</button>` : ''}
+                  ${currentUser.role === 'admin' ? `<button onclick="currentPage='admin-dashboard';render()" class="text-xs bg-white/20 px-2 py-1 rounded">${t('admin')}</button>` : ''}
+                  <button onclick="handleLogout()" class="text-xs bg-white/10 px-2 py-1 rounded">${t('logout')}</button>
+                </div>
+              ` : `
+                <button onclick="currentPage='login';render()" class="text-sm bg-white/10 px-3 py-1 rounded">${t('login')}</button>
+                <button onclick="currentPage='signup';render()" class="text-sm btn-primary px-3 py-1 rounded">${t('signup')}</button>
+              `}
+            </div>
+          </div>
+        </header>
+      `;
+    }
+
+    function renderLanding() {
+      const allFields = [...seedFields, ...appData.fields];
+      const approvedFields = allFields.filter(f => f.approved && f.active);
+      
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      return `
+        <div class="w-full animate-fadeIn" dir="${dir}">
+          <section class="bg-amber-50 border-b-2 border-amber-200 px-4 py-3 text-center">
+            <p class="text-amber-900 text-sm font-medium">⚠️ Demo only — accounts, bookings, and payments are simulated.</p>
+          </section>
+
+          <section class="gradient-bg text-white py-16 px-4">
+            <div class="max-w-4xl mx-auto text-center">
+              <h2 class="text-4xl md:text-5xl font-bold mb-4">${t('findFields')}</h2>
+              <p class="text-lg text-emerald-100 mb-8">${t('description')}</p>
+              <button onclick="currentPage='fields';render()" class="btn-primary text-white px-8 py-3 rounded-xl font-semibold text-lg">
+                🔍 ${t('search')}
+              </button>
+            </div>
+          </section>
+
+          <section class="py-12 px-4">
+            <div class="max-w-6xl mx-auto">
+              <h3 class="text-2xl font-bold mb-8 text-center">${t('browse')}</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                ${approvedFields.slice(0, 6).map(field => `
+                  <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover border border-slate-100 cursor-pointer" onclick="document.body.dataset.selectedFieldId='${field.id}';currentPage='field-details';render()">
+                    <div class="h-40 bg-slate-100 flex items-center justify-center overflow-hidden">
+                      ${generatePitchSVG(field.pitchSvg)}
+                    </div>
+                    <div class="p-4">
+                      <h4 class="font-bold text-base mb-1">${field.fieldName}</h4>
+                      <p class="text-slate-500 text-xs mb-2">📍 ${field.area}, ${field.emirate}</p>
+                      <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded">${field.pitchSize}</span>
+                        <span class="text-emerald-600 font-bold text-sm">AED ${field.basePrice}/hr</span>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </section>
+
+          <section class="py-8 px-4 bg-amber-50 border-t-2 border-amber-200 text-center">
+            <p class="text-amber-900 text-sm font-medium">${t('demoMode')}</p>
+          </section>
+        </div>
+      `;
+    }
+
+    function renderFieldsList() {
+      const allFields = [...seedFields, ...appData.fields].filter(f => f.approved && f.active);
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      const selectedEmirate = document.getElementById('emirate-filter')?.value || '';
+      const selectedArea = document.getElementById('area-filter')?.value || '';
+      const selectedPrice = document.getElementById('price-filter')?.value || '';
+      
+      const availableAreas = selectedEmirate ? uaeData[selectedEmirate] || [] : [];
+      
+      let filteredFields = allFields;
+      if (selectedEmirate) {
+        filteredFields = filteredFields.filter(f => f.emirate === selectedEmirate);
+      }
+      if (selectedArea) {
+        filteredFields = filteredFields.filter(f => f.area === selectedArea);
+      }
+      if (selectedPrice) {
+        filteredFields = filteredFields.filter(f => f.basePrice <= parseInt(selectedPrice));
+      }
+      
+      return `
+        <div class="max-w-6xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold mb-4">${t('browse')}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <select id="emirate-filter" onchange="render()" class="px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-600">
+                <option value="">${t('selectEmirate')}</option>
+                ${Object.keys(uaeData).map(e => `<option value="${e}" ${selectedEmirate === e ? 'selected' : ''}>${e}</option>`).join('')}
+              </select>
+              <select id="area-filter" onchange="render()" class="px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-600" ${!selectedEmirate ? 'disabled' : ''}>
+                <option value="">${t('selectArea')}</option>
+                ${availableAreas.map(a => `<option value="${a}" ${selectedArea === a ? 'selected' : ''}>${a}</option>`).join('')}
+              </select>
+              <input type="number" id="price-filter" onchange="render()" placeholder="${t('price')} (AED)" value="${selectedPrice}" class="px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-600">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${filteredFields.length === 0 ? `
+              <div class="col-span-full text-center py-12">
+                <p class="text-slate-500 text-lg">${t('noFields')}</p>
+              </div>
+            ` : filteredFields.map(field => `
+              <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover border border-slate-100 cursor-pointer" onclick="document.body.dataset.selectedFieldId='${field.id}';currentPage='field-details';render()">
+                <div class="h-48 bg-slate-100 flex items-center justify-center overflow-hidden">
+                  ${generatePitchSVG(field.pitchSvg)}
+                </div>
+                <div class="p-5">
+                  <h4 class="font-bold text-lg mb-2">${field.fieldName}</h4>
+                  <p class="text-slate-500 text-sm mb-3">📍 ${field.area}, ${field.emirate}</p>
+                  <div class="flex items-center justify-between text-xs text-slate-600 mb-3">
+                    <span>${field.pitchSize}</span>
+                    <span>${field.indoor ? t('indoor') : t('outdoor')}</span>
+                  </div>
+                  <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+                    <span class="text-emerald-600 font-bold">AED ${field.basePrice}/hr</span>
+                    <button class="btn-primary text-white text-xs px-3 py-1 rounded">${t('book')}</button>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFieldDetails() {
+      const fieldId = document.body.dataset.selectedFieldId;
+      const allFields = [...seedFields, ...appData.fields];
+      const field = allFields.find(f => f.id === fieldId);
+      
+      if (!field) return `<div class="p-8 text-center">${t('error')}</div>`;
+      
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      // Get booking state from sessionStorage
+      const bookingState = JSON.parse(sessionStorage.getItem(`booking-${fieldId}`) || '{}');
+      const selectedDate = bookingState.date || '';
+      const selectedTime = bookingState.time || '';
+      const selectedDuration = bookingState.duration || '';
+      
+      // Generate time slots for selected date
+      let timeSlots = [];
+      if (selectedDate) {
+        const hours = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+        timeSlots = hours.slice(0, -1).map(hour => ({
+          time: hour,
+          nextHour: hours[hours.indexOf(hour) + 1]
+        }));
+      }
+      
+      return `
+        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <button onclick="currentPage='fields';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '→' : '←'} ${t('back')}</button>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+              <div class="h-64 bg-slate-100 rounded-xl flex items-center justify-center mb-6 overflow-hidden">
+                ${generatePitchSVG(field.pitchSvg)}
+              </div>
+              
+              <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+                <h2 class="text-3xl font-bold mb-2">${field.fieldName}</h2>
+                <p class="text-slate-500 mb-4">📍 ${field.address}, ${field.area}, ${field.emirate}</p>
+                <p class="text-slate-700 mb-4">${field.description}</p>
+                
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <p class="text-sm text-slate-500">${t('pitchSizeRequired')}</p>
+                    <p class="font-semibold">${field.pitchSize}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-slate-500">${t('turf')}</p>
+                    <p class="font-semibold">${field.turfType}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-slate-500">${t('amenities')}</p>
+                    <p class="font-semibold text-sm">${field.amenities}</p>
+                  </div>
+                  <div>
+                    <p class="text-sm text-slate-500">${t('rules')}</p>
+                    <p class="font-semibold text-sm">${field.rules}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="md:col-span-1">
+              <div class="bg-white rounded-xl p-6 shadow-sm sticky top-24">
+                <div class="text-3xl font-bold text-emerald-600 mb-2">AED ${field.basePrice}</div>
+                <p class="text-slate-500 text-sm mb-6">${t('hour')}</p>
+                
+                <div class="mb-4">
+                  <label class="block text-sm font-semibold mb-2">${t('selectDate')}</label>
+                  <input type="date" id="booking-date" value="${selectedDate}" onchange="updateBookingState('${fieldId}')" class="w-full px-4 py-2 rounded-lg border border-slate-200" min="${new Date().toISOString().split('T')[0]}">
+                </div>
+
+                ${selectedDate ? `
+                  <div class="mb-4">
+                    <label class="block text-sm font-semibold mb-2">${t('selectSlots')}</label>
+                    <div class="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto">
+                      ${timeSlots.map(slot => `
+                        <button type="button" onclick="selectTimeSlot('${fieldId}', '${slot.time}')" class="px-2 py-2 rounded border-2 text-xs font-semibold transition-all ${selectedTime === slot.time ? 'border-emerald-600 bg-emerald-50 text-emerald-600' : 'border-slate-200 hover:border-emerald-400'}">
+                          ${slot.time}
+                        </button>
+                      `).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+                
+                <select id="duration-select" value="${selectedDuration}" onchange="updateBookingState('${fieldId}')" class="w-full px-4 py-2 rounded-lg border border-slate-200 mb-4">
+                  <option value="">-- ${t('selectDuration')} --</option>
+                  <option value="60">60 ${t('durationMin')}</option>
+                  <option value="90">90 ${t('durationMin')}</option>
+                  <option value="120">120 ${t('durationMin')}</option>
+                </select>
+
+                <button onclick="proceedToCheckout('${field.id}')" class="w-full btn-primary text-white py-3 rounded-lg font-semibold mb-2">
+                  ${currentUser ? t('bookField') : t('login')}
+                </button>
+                
+                ${!currentUser ? `<button onclick="currentPage='login';render()" class="w-full btn-secondary py-2 rounded-lg font-semibold text-sm">${t('signup')}</button>` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateBookingState(fieldId) {
+      const date = document.getElementById('booking-date').value;
+      const duration = document.getElementById('duration-select').value;
+      const bookingState = JSON.parse(sessionStorage.getItem(`booking-${fieldId}`) || '{}');
+      
+      sessionStorage.setItem(`booking-${fieldId}`, JSON.stringify({
+        ...bookingState,
+        date,
+        duration
+      }));
+      
+      render();
+    }
+
+    function selectTimeSlot(fieldId, time) {
+      const bookingState = JSON.parse(sessionStorage.getItem(`booking-${fieldId}`) || '{}');
+      
+      sessionStorage.setItem(`booking-${fieldId}`, JSON.stringify({
+        ...bookingState,
+        time
+      }));
+      
+      render();
+    }
+
+    function proceedToCheckout(fieldId) {
+      if (!currentUser) {
+        currentPage = 'login';
+        render();
+        return;
+      }
+      
+      const bookingState = JSON.parse(sessionStorage.getItem(`booking-${fieldId}`) || '{}');
+      const date = bookingState.date;
+      const startTime = bookingState.time;
+      const duration = bookingState.duration;
+      
+      if (!date) {
+        showToast(t('selectDate'), 'error');
+        return;
+      }
+      
+      if (!startTime) {
+        showToast(t('selectSlots'), 'error');
+        return;
+      }
+      
+      if (!duration) {
+        showToast(t('selectDuration'), 'error');
+        return;
+      }
+      
+      const allFields = [...seedFields, ...appData.fields];
+      const field = allFields.find(f => f.id === fieldId);
+      
+      const pricePerHour = field.basePrice;
+      const hours = duration / 60;
+      const subtotal = pricePerHour * hours;
+      const commission = subtotal * 0.05;
+      const total = subtotal + commission;
+      
+      sessionStorage.setItem('checkout-data', JSON.stringify({
+        fieldId,
+        date,
+        startTime,
+        duration,
+        subtotal: Math.round(subtotal),
+        commission: Math.round(commission),
+        total: Math.round(total),
+        field: field
+      }));
+      
+      currentPage = 'checkout';
+      render();
+    }
+
+    function renderCheckout() {
+      const checkoutData = JSON.parse(sessionStorage.getItem('checkout-data') || '{}');
+      const field = checkoutData.field;
+      
+      if (!field) {
+        currentPage = 'fields';
+        render();
+        return;
+      }
+      
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      const endTime = calculateEndTime(checkoutData.startTime, checkoutData.duration);
+      
+      return `
+        <div class="max-w-2xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <h2 class="text-2xl font-bold mb-6">${t('checkout')}</h2>
+          
+          <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-24 h-24 bg-slate-100 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                ${generatePitchSVG(field.pitchSvg)}
+              </div>
+              <div>
+                <h3 class="font-bold text-lg">${field.fieldName}</h3>
+                <p class="text-slate-500">${field.area}, ${field.emirate}</p>
+              </div>
+            </div>
+
+            <div class="bg-emerald-50 rounded-lg p-4 mb-4 border-l-4 border-emerald-600">
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p class="text-slate-600">${t('date')}</p>
+                  <p class="font-semibold">${new Date(checkoutData.date).toLocaleDateString()}</p>
+                </div>
+                <div>
+                  <p class="text-slate-600">${t('time')}</p>
+                  <p class="font-semibold">${checkoutData.startTime} - ${endTime}</p>
+                </div>
+                <div>
+                  <p class="text-slate-600">${t('selectDuration')}</p>
+                  <p class="font-semibold">${checkoutData.duration} ${t('durationMin')}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-slate-200 pt-4">
+              <div class="flex justify-between mb-2">
+                <span>${t('price')}:</span>
+                <span>AED ${checkoutData.subtotal}</span>
+              </div>
+              <div class="flex justify-between mb-4">
+                <span>${t('commission')}:</span>
+                <span>AED ${checkoutData.commission}</span>
+              </div>
+              <div class="flex justify-between font-bold text-lg border-t border-slate-200 pt-4">
+                <span>${t('total')}:</span>
+                <span class="text-emerald-600">AED ${checkoutData.total}</span>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="completePayment()" class="w-full btn-primary text-white py-3 rounded-lg font-semibold mb-2">
+            💳 ${t('payNow')}
+          </button>
+          <button onclick="currentPage='field-details';render()" class="w-full btn-secondary py-2 rounded-lg font-semibold">
+            ${t('cancel')}
+          </button>
+        </div>
+      `;
+    }
+
+    async function completePayment() {
+      const checkoutData = JSON.parse(sessionStorage.getItem('checkout-data') || '{}');
+      
+      const booking = {
+        type: 'booking',
+        id: generateId(),
+        userId: currentUser.id,
+        fieldId: checkoutData.fieldId,
+        date: checkoutData.date,
+        duration: checkoutData.duration,
+        totalPrice: checkoutData.total,
+        commissionAmount: checkoutData.commission,
+        ownerPayout: checkoutData.subtotal - checkoutData.commission,
+        bookingStatus: 'paid',
+        createdAt: new Date().toISOString()
+      };
+      
+      const success = await saveRecord(booking);
+      
+      if (success) {
+        showToast(t('bookingConfirmed'));
+        sessionStorage.removeItem('checkout-data');
+        currentPage = 'booking-ticket';
+        sessionStorage.setItem('current-booking-id', booking.id);
+        render();
+      }
+    }
+
+    function renderBookingTicket() {
+      const bookingId = sessionStorage.getItem('current-booking-id');
+      const booking = appData.bookings.find(b => b.id === bookingId);
+      
+      if (!booking) {
+        currentPage = 'my-bookings';
+        render();
+        return;
+      }
+      
+      const allFields = [...seedFields, ...appData.fields];
+      const field = allFields.find(f => f.id === booking.fieldId);
+      
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      const qrCode = generateQRCode(`BOOKING-${booking.id}`);
+      
+      return `
+        <div class="max-w-2xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <div class="bg-white rounded-xl p-8 shadow-lg text-center">
+            <div class="text-5xl mb-4">✅</div>
+            <h2 class="text-3xl font-bold mb-2">${t('bookingConfirmed')}</h2>
+            
+            <div class="bg-emerald-50 rounded-xl p-6 my-6">
+              <div class="text-lg font-bold mb-4">${t('fieldName')}: ${field.fieldName}</div>
+              <div class="flex justify-between mb-2">
+                <span>${t('bookingID')}:</span>
+                <span class="font-mono font-bold">${booking.id}</span>
+              </div>
+              <div class="flex justify-between mb-2">
+                <span>${t('date')}:</span>
+                <span>${new Date(booking.date).toLocaleDateString()}</span>
+              </div>
+              <div class="flex justify-between mb-4">
+                <span>${t('time')}:</span>
+                <span>${booking.duration} ${t('durationMin')}</span>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-6 mb-6">
+              <h3 class="font-bold mb-4">${t('QRCode')}</h3>
+              <div class="flex justify-center mb-4">
+                ${qrCode}
+              </div>
+              <p class="text-sm text-slate-600">${t('showQRCode')}</p>
+            </div>
+
+            <div class="bg-white border-2 border-emerald-200 rounded-xl p-4 mb-6">
+              <p class="text-2xl font-bold text-emerald-600">AED ${booking.totalPrice}</p>
+              <p class="text-slate-500">${t('total')}</p>
+            </div>
+
+            <button onclick="currentPage='my-bookings';render()" class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
+              ${t('myBookings')}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMyBookings() {
+      if (!currentUser) {
+        currentPage = 'login';
+        render();
+        return;
+      }
+      
+      const myBookings = appData.bookings.filter(b => b.userId === currentUser.id);
+      const allFields = [...seedFields, ...appData.fields];
+      
+      const upcomingBookings = myBookings.filter(b => new Date(b.date) >= new Date()).sort((a, b) => new Date(a.date) - new Date(b.date));
+      const pastBookings = myBookings.filter(b => new Date(b.date) < new Date()).sort((a, b) => new Date(b.date) - new Date(a.date));
+      
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      return `
+        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <h2 class="text-2xl font-bold mb-6">${t('myBookings')}</h2>
+          
+          <div class="mb-8">
+            <h3 class="text-xl font-semibold mb-4">${t('upcomingBookings')}</h3>
+            ${upcomingBookings.length === 0 ? `
+              <div class="bg-slate-50 rounded-xl p-8 text-center">
+                <p class="text-slate-500 mb-4">${t('noBookings')}</p>
+                <button onclick="currentPage='fields';render()" class="btn-primary text-white px-6 py-2 rounded-lg">${t('startBooking')}</button>
+              </div>
+            ` : `
+              <div class="space-y-4">
+                ${upcomingBookings.map(booking => {
+                  const field = allFields.find(f => f.id === booking.fieldId);
+                  return `
+                    <div class="bg-white rounded-xl p-4 border-l-4 border-emerald-600 shadow-sm">
+                      <div class="flex justify-between items-start mb-2">
+                        <div>
+                          <h4 class="font-bold">${field.fieldName}</h4>
+                          <p class="text-sm text-slate-500">${new Date(booking.date).toLocaleDateString()}</p>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-sm font-semibold">${booking.bookingStatus}</span>
+                      </div>
+                      <button onclick="alert('QR Code: BOOKING-${booking.id}')" class="text-sm text-emerald-600 font-semibold hover:underline">View QR Code</button>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            `}
+          </div>
+
+          ${pastBookings.length > 0 ? `
+            <div>
+              <h3 class="text-xl font-semibold mb-4">${t('pastBookings')}</h3>
+              <div class="space-y-4">
+                ${pastBookings.map(booking => {
+                  const field = allFields.find(f => f.id === booking.fieldId);
+                  return `
+                    <div class="bg-white rounded-xl p-4 border-l-4 border-slate-300 shadow-sm opacity-75">
+                      <div class="flex justify-between items-start">
+                        <div>
+                          <h4 class="font-bold">${field.fieldName}</h4>
+                          <p class="text-sm text-slate-500">${new Date(booking.date).toLocaleDateString()}</p>
+                        </div>
+                        <span class="text-slate-500 px-3 py-1 rounded-full text-sm font-semibold">Completed</span>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function renderAddField() {
+      if (!currentUser || currentUser.role !== 'owner') {
+        currentPage = 'owner-dashboard';
+        render();
+        return;
+      }
+
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      const emirates = Object.keys(uaeData);
+      
+      // Get form state from sessionStorage to preserve values
+      const formState = JSON.parse(sessionStorage.getItem('add-field-form') || '{}');
+      const selectedEmirate = formState.emirate || '';
+      const areas = selectedEmirate ? uaeData[selectedEmirate] : [];
+
+      return `
+        <div class="max-w-2xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <button onclick="currentPage='owner-dashboard';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '→' : '←'} ${t('back')}</button>
+          
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <h2 class="text-2xl font-bold mb-6">${t('addField')}</h2>
+
+            <form onsubmit="handleAddField(event)">
+              <div class="mb-4">
+                <label class="block text-sm font-semibold mb-2">${t('fieldNameRequired')}</label>
+                <input type="text" name="fieldName" value="${formState.fieldName || ''}" required class="w-full px-4 py-2 rounded-lg border border-slate-200" placeholder="e.g. Emirates Arena" onchange="saveAddFieldState()">
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-semibold mb-2">${t('emirateRequired')}</label>
+                  <select name="emirate" required onchange="saveAddFieldState(); render()" class="w-full px-4 py-2 rounded-lg border border-slate-200" value="${selectedEmirate}">
+                    <option value="">-- ${t('selectEmirate')} --</option>
+                    ${emirates.map(e => `<option value="${e}" ${selectedEmirate === e ? 'selected' : ''}>${e}</option>`).join('')}
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold mb-2">${t('areaRequired')}</label>
+                  <select name="area" required ${!selectedEmirate ? 'disabled' : ''} class="w-full px-4 py-2 rounded-lg border border-slate-200" onchange="saveAddFieldState()" value="${formState.area || ''}">
+                    <option value="">-- ${t('selectArea')} --</option>
+                    ${areas.map(a => `<option value="${a}" ${formState.area === a ? 'selected' : ''}>${a}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-sm font-semibold mb-2">${t('addressRequired')}</label>
+                <input type="text" name="address" value="${formState.address || ''}" required class="w-full px-4 py-2 rounded-lg border border-slate-200" placeholder="Complete address" onchange="saveAddFieldState()">
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-semibold mb-2">${t('pitchSizeRequired')}</label>
+                  <select name="pitchSize" required class="w-full px-4 py-2 rounded-lg border border-slate-200" onchange="saveAddFieldState()" value="${formState.pitchSize || ''}">
+                    <option value="">-- Select --</option>
+                    <option value="5v5" ${formState.pitchSize === '5v5' ? 'selected' : ''}>5v5</option>
+                    <option value="7v7" ${formState.pitchSize === '7v7' ? 'selected' : ''}>7v7</option>
+                    <option value="11v11" ${formState.pitchSize === '11v11' ? 'selected' : ''}>11v11</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold mb-2">${t('turf')}</label>
+                  <select name="turfType" required class="w-full px-4 py-2 rounded-lg border border-slate-200" onchange="saveAddFieldState()" value="${formState.turfType || ''}">
+                    <option value="">-- Select --</option>
+                    <option value="Natural Grass" ${formState.turfType === 'Natural Grass' ? 'selected' : ''}>Natural Grass</option>
+                    <option value="Artificial Turf" ${formState.turfType === 'Artificial Turf' ? 'selected' : ''}>Artificial Turf</option>
+                    <option value="Hybrid" ${formState.turfType === 'Hybrid' ? 'selected' : ''}>Hybrid</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-semibold mb-2">${t('basePriceRequired')}</label>
+                  <input type="number" name="basePrice" value="${formState.basePrice || ''}" required min="50" max="5000" class="w-full px-4 py-2 rounded-lg border border-slate-200" placeholder="100" onchange="saveAddFieldState()">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-semibold mb-2">${t('indoor')}?</label>
+                  <select name="indoor" class="w-full px-4 py-2 rounded-lg border border-slate-200" onchange="saveAddFieldState()" value="${formState.indoor || 'false'}">
+                    <option value="false" ${formState.indoor === 'false' || !formState.indoor ? 'selected' : ''}>${t('outdoor')}</option>
+                    <option value="true" ${formState.indoor === 'true' ? 'selected' : ''}>${t('indoor')}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-sm font-semibold mb-2">${t('amenities')}</label>
+                <input type="text" name="amenities" value="${formState.amenities || ''}" class="w-full px-4 py-2 rounded-lg border border-slate-200" placeholder="e.g. Parking,Showers,Cafeteria" onchange="saveAddFieldState()">
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-sm font-semibold mb-2">${t('description')}</label>
+                <textarea name="description" rows="3" class="w-full px-4 py-2 rounded-lg border border-slate-200 resize-none" placeholder="Describe your field..." onchange="saveAddFieldState()">${formState.description || ''}</textarea>
+              </div>
+
+              <div class="mb-6">
+                <label class="block text-sm font-semibold mb-2">${t('rules')}</label>
+                <textarea name="rules" rows="2" class="w-full px-4 py-2 rounded-lg border border-slate-200 resize-none" placeholder="Field rules..." onchange="saveAddFieldState()">${formState.rules || ''}</textarea>
+              </div>
+
+              <div class="flex gap-4">
+                <button type="submit" class="flex-1 btn-primary text-white py-3 rounded-lg font-semibold">
+                  ${t('submit')}
+                </button>
+                <button type="button" onclick="clearAddFieldState(); currentPage='owner-dashboard';render()" class="flex-1 btn-secondary py-3 rounded-lg font-semibold">
+                  ${t('cancel')}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function saveAddFieldState() {
+      const form = document.querySelector('form');
+      if (form) {
+        const formData = new FormData(form);
+        const state = {
+          fieldName: formData.get('fieldName'),
+          emirate: formData.get('emirate'),
+          area: formData.get('area'),
+          address: formData.get('address'),
+          pitchSize: formData.get('pitchSize'),
+          turfType: formData.get('turfType'),
+          basePrice: formData.get('basePrice'),
+          indoor: formData.get('indoor'),
+          amenities: formData.get('amenities'),
+          description: formData.get('description'),
+          rules: formData.get('rules')
+        };
+        sessionStorage.setItem('add-field-form', JSON.stringify(state));
+      }
+    }
+
+    function clearAddFieldState() {
+      sessionStorage.removeItem('add-field-form');
+    }
+
+    async function handleAddField(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const fieldName = form.querySelector('[name="fieldName"]').value;
+      const emirate = form.querySelector('[name="emirate"]').value;
+      const area = form.querySelector('[name="area"]').value;
+      const address = form.querySelector('[name="address"]').value;
+      const pitchSize = form.querySelector('[name="pitchSize"]').value;
+      const turfType = form.querySelector('[name="turfType"]').value;
+      const basePrice = parseInt(form.querySelector('[name="basePrice"]').value);
+      const indoor = form.querySelector('[name="indoor"]').value === 'true';
+      const amenities = form.querySelector('[name="amenities"]').value;
+      const description = form.querySelector('[name="description"]').value;
+      const rules = form.querySelector('[name="rules"]').value;
+
+      const newField = {
+        type: 'field',
+        id: generateId(),
+        fieldName,
+        emirate,
+        area,
+        address,
+        latitude: 25.0 + Math.random() * 1.5,
+        longitude: 55.0 + Math.random() * 1.5,
+        photos: '⚽',
+        amenities: amenities || 'Parking',
+        pitchSize,
+        indoor,
+        turfType,
+        basePrice,
+        ownerId: currentUser.id,
+        active: true,
+        approved: false,
+        description: description || 'Premium football field',
+        rules: rules || 'Respect the facility',
+        createdAt: new Date().toISOString()
+      };
+
+      const success = await saveRecord(newField);
+      
+      if (success) {
+        showToast(t('submit') + ' - ' + t('approvalPending'));
+        currentPage = 'owner-dashboard';
+        render();
+      }
+    }
+
+    function renderOwnerDashboard() {
+      if (!currentUser || currentUser.role !== 'owner') {
+        currentPage = 'landing';
+        render();
+        return;
+      }
+      
+      const myFields = [...seedFields, ...appData.fields].filter(f => f.ownerId === currentUser.id);
+      const myBookings = appData.bookings.filter(b => {
+        const field = [...seedFields, ...appData.fields].find(f => f.id === b.fieldId);
+        return field && field.ownerId === currentUser.id;
+      });
+      
+      const totalEarnings = myBookings.reduce((sum, b) => sum + b.ownerPayout, 0);
+      
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      return `
+        <div class="max-w-6xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <h2 class="text-2xl font-bold mb-6">${t('dashboard')}</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-emerald-600">
+              <p class="text-slate-500 text-sm">${t('myFields')}</p>
+              <p class="text-3xl font-bold">${myFields.length}</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-blue-600">
+              <p class="text-slate-500 text-sm">${t('totalBookings')}</p>
+              <p class="text-3xl font-bold">${myBookings.length}</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-green-600">
+              <p class="text-slate-500 text-sm">${t('earnings')}</p>
+              <p class="text-3xl font-bold">AED ${totalEarnings}</p>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold">${t('myFields')}</h3>
+              <button onclick="currentPage='add-field';render()" class="btn-primary text-white px-4 py-2 rounded-lg text-sm">+ ${t('addField')}</button>
+            </div>
+            ${myFields.length === 0 ? `
+              <p class="text-slate-500 text-center py-8">${t('noFields')}</p>
+            ` : `
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${myFields.map(field => `
+                  <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <h4 class="font-bold mb-2">${field.fieldName}</h4>
+                    <p class="text-sm text-slate-500 mb-2">${field.area}, ${field.emirate}</p>
+                    <div class="flex items-center justify-between">
+                      <span class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">${field.approved ? t('approved') : t('approvalPending')}</span>
+                      <span class="text-emerald-600 font-semibold">AED ${field.basePrice}/hr</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </div>
+
+          <div>
+            <h3 class="text-xl font-bold mb-4">${t('totalBookings')}</h3>
+            ${myBookings.length === 0 ? `
+              <p class="text-slate-500 text-center py-8">${t('noBookings')}</p>
+            ` : `
+              <div class="space-y-2">
+                ${myBookings.slice(0, 10).map(booking => {
+                  const field = [...seedFields, ...appData.fields].find(f => f.id === booking.fieldId);
+                  return `
+                    <div class="bg-white rounded-lg p-3 flex justify-between items-center">
+                      <div>
+                        <p class="font-semibold text-sm">${field.fieldName}</p>
+                        <p class="text-xs text-slate-500">${new Date(booking.date).toLocaleDateString()}</p>
+                      </div>
+                      <span class="font-bold">AED ${booking.ownerPayout}</span>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAdminDashboard() {
+      if (!currentUser || currentUser.role !== 'admin') {
+        currentPage = 'landing';
+        render();
+        return;
+      }
+      
+      const pendingFields = appData.fields.filter(f => !f.approved);
+      const totalRevenue = appData.bookings.reduce((sum, b) => sum + b.commissionAmount, 0);
+      
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      return `
+        <div class="max-w-6xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <h2 class="text-2xl font-bold mb-6">${t('adminPanel')}</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+              <p class="text-slate-500 text-sm">${t('totalBookings')}</p>
+              <p class="text-3xl font-bold">${appData.bookings.length}</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+              <p class="text-slate-500 text-sm">${t('revenue')}</p>
+              <p class="text-3xl font-bold text-emerald-600">AED ${totalRevenue}</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+              <p class="text-slate-500 text-sm">${t('approveFields')}</p>
+              <p class="text-3xl font-bold text-amber-600">${pendingFields.length}</p>
+            </div>
+          </div>
+
+          ${pendingFields.length > 0 ? `
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+              <h3 class="font-bold mb-4">${t('approveFields')}</h3>
+              <div class="space-y-3">
+                ${pendingFields.map(field => `
+                  <div class="flex items-center justify-between p-3 border border-slate-200 rounded-lg">
+                    <div>
+                      <p class="font-semibold">${field.fieldName}</p>
+                      <p class="text-sm text-slate-500">${field.area}, ${field.emirate}</p>
+                    </div>
+                    <button onclick="approveField('${field.id}')" class="btn-primary text-white px-4 py-2 rounded text-sm">${t('confirm')}</button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function approveField(fieldId) {
+      const field = appData.fields.find(f => f.id === fieldId);
+      if (field) {
+        field.approved = true;
+        updateRecord(field);
+        showToast('Field approved!');
+      }
+    }
+
+    function renderAuth(isLogin) {
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      return `
+        <div class="min-h-[80vh] flex items-center justify-center px-4 py-12 animate-fadeIn" dir="${dir}">
+          <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+              <div class="text-5xl mb-4">⚽</div>
+              <h2 class="text-2xl font-bold">${isLogin ? t('login') : t('signup')}</h2>
+            </div>
+
+            <form onsubmit="${isLogin ? 'handleLogin(event)' : 'handleSignup(event)'}">
+              ${!isLogin ? `
+                <div class="mb-4">
+                  <label class="block text-sm font-medium mb-1">${t('name')}</label>
+                  <input type="text" name="name" required class="w-full px-4 py-2 rounded-lg border border-slate-200">
+                </div>
+              ` : ''}
+
+              <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">${t('email')}</label>
+                <input type="email" name="email" required class="w-full px-4 py-2 rounded-lg border border-slate-200">
+              </div>
+
+              <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">${t('demoPasscode')}</label>
+                <input type="password" name="password" required class="w-full px-4 py-2 rounded-lg border border-slate-200">
+                <p class="text-xs text-slate-500 mt-1">${t('demoPasscodeHint')}</p>
+              </div>
+
+              ${!isLogin ? `
+                <div class="mb-6">
+                  <label class="block text-sm font-medium mb-1">${t('phone')}</label>
+                  <input type="tel" name="phone" required class="w-full px-4 py-2 rounded-lg border border-slate-200">
+                </div>
+
+                <div class="mb-6">
+                  <label class="block text-sm font-medium mb-2">${t('iAm')}</label>
+                  <select name="role" class="w-full px-4 py-2 rounded-lg border border-slate-200">
+                    <option value="player">${t('player')}</option>
+                    <option value="owner">${t('owner')}</option>
+                  </select>
+                </div>
+              ` : ''}
+
+              <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-semibold mb-4">
+                ${isLogin ? t('signIn') : t('signUp')}
+              </button>
+
+              <p class="text-center text-sm text-slate-500">
+                ${isLogin ? t('dontHaveAccount') : t('haveAccount')}
+                <button type="button" onclick="currentPage='${isLogin ? 'signup' : 'login'}';render()" class="text-emerald-600 hover:underline ml-1">
+                  ${isLogin ? t('signUp') : t('signIn')}
+                </button>
+              </p>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function render() {
+      const app = document.getElementById('app');
+      
+      let content = '';
+      
+      switch (currentPage) {
+        case 'landing':
+          content = renderLanding();
+          break;
+        case 'fields':
+          content = renderFieldsList();
+          break;
+        case 'field-details':
+          content = renderFieldDetails();
+          break;
+        case 'checkout':
+          content = renderCheckout();
+          break;
+        case 'booking-ticket':
+          content = renderBookingTicket();
+          break;
+        case 'my-bookings':
+          content = renderMyBookings();
+          break;
+        case 'owner-dashboard':
+          content = renderOwnerDashboard();
+          break;
+        case 'add-field':
+          content = renderAddField();
+          break;
+        case 'admin-dashboard':
+          content = renderAdminDashboard();
+          break;
+        case 'login':
+          content = renderAuth(true);
+          break;
+        case 'signup':
+          content = renderAuth(false);
+          break;
+        default:
+          content = renderLanding();
+      }
+
+      app.innerHTML = `
+        ${renderHeader()}
+        <main class="w-full">
+          ${content}
+        </main>
+      `;
+    }
+
+    // Initialize
+    async function init() {
+      document.documentElement.dir = 'ltr';
+      document.documentElement.lang = 'en';
+
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize Data SDK');
+        }
+      } else {
+        // Demo mode - load seed data
+        appData.fields = seedFields;
+      }
+
+      render();
+    }
+
+    init();
+  </script>
+</html>
