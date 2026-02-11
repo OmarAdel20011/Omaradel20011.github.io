@@ -4,11 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>PitchPass UAE - Football Field Booking</title>
+  <title>HajzKoora - Football Field Booking</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&amp;family=Cairo:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&amp;family=Cairo:wght@600;700&amp;display=swap" rel="stylesheet"><!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,ar,ur,fr,es,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <style>
     body { box-sizing: border-box; }
     html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
@@ -34,12 +42,16 @@
     @keyframes slideIn { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     input:focus, select:focus, textarea:focus { outline: none; ring: 2px; ring-color: #10b981; }
     .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+    
+
   </style>
   <style>@view-transition { navigation: auto; }</style>
  </head>
  <body class="bg-slate-50 text-slate-800 w-full h-full overflow-auto">
   <div id="app" class="w-full"></div>
   <script>
+
+
     // =====================================================
     // PitchPass UAE - Production Ready App
     // =====================================================
@@ -177,224 +189,109 @@
         showQRCode: 'Show this code at the venue',
         location: 'Location'
       },
-      ar: {
-        appTitle: 'بيتش باص',
-        tagline: 'احجز ملعبك المثالي',
-        findFields: 'ابحث واحجز ملاعب ك����ة قدم في ��م���ع أنح��ء الإمارات السبع',
-        description: 'من 5 ضد 5 إلى الملاعب ����لكاملة • حجز فوري • أفض�� الأسعار',
-        search: 'البحث عن الملاعب',
-        browse: 'تصف���� الملاعب',
-        home: 'الرئيسية',
-        fields: 'الملاعب',
-        myBookings: 'حجو��اتي',
-        dashboard: 'ل��������ة ال������حكم',
-        admin: 'الإدارة',
-        login: 'تسجيل الدخول',
-        signup: 'إن��اء حساب',
-        logout: 'تسجيل الخ����ج',
-        email: 'البريد ا��إل��ترو��ي',
-        password: 'كلمة المرور',
-        demoPasscode: 'رمز الديمو',
-        demoPasscodeHint: 'هذا عرض توض��ح��. لا تستخ����م بيانات حقيقية.',
-        name: 'ال������سم الكامل',
-        phone: 'رقم الهاتف',
-        iAm: '����نا',
-        player: 'لاعب - ��حجز ملاعب',
-        owner: 'مالك مل�������������ب - أدرج ملاعب��',
-        selectEmirate: 'ا��تر إمارة',
-        selectArea: 'اختر منطقة',
-        selectDate: 'اختر التاريخ',
-        selectDuration: 'المدة',
-        book: 'احجز الآن',
-        bookingConfirmed: 'تم تأكيد الحجز! 🎉',
-        bookingCancelled: 'تم ��لغاء الحجز',
-        price: 'السعر',
-        commission: 'عم����لة 5%',
-        total: 'الم��موع',
-        checkout: 'الد��ع',
-        payNow: 'ادفع الآن',
-        QRCode: 'رمز QR للحجز',
-        bookingID: 'معرف الحجز',
-        fieldName: 'اسم ال��لعب',
-        date: 'ا��تاري��',
-        time: 'ال������ت',
-        upcomingBookings: 'الحجوزات القادمة',
-        pastBookings: 'الحجوزات السابقة',
-        noBookings: 'لا توجد حجوزات',
-        startBooking: 'ابدأ بحجز ملعبك ال����ل!',
-        myFields: 'ملاعبي',
-        addField: 'إ��ا��ة ملعب جديد',
-        fieldNameRequired: 'اسم الملعب',
-        emirateRequired: 'الإمارة',
-        areaRequired: 'المنطقة',
-        addressRequired: 'ال��نوان',
-        pitchSizeRequired: 'حجم الملعب',
-        basePriceRequired: 'السعر ال��ساسي (درهم)',
-        description: 'الو����ف',
-        rules: 'القواعد',
-        submit: 'إرسال للموافقة',
-        approvalPending: 'قيد ا��انتظار',
-        approved: '��وافق عليه',
-        active: 'نشط',
-        inactive: '��ير نشط',
-        earnings: 'الأرباح',
-        pendingPayout: 'الدفع المعلق',
-        adminPanel: 'لوحة الإدارة',
-        approveFields: 'الموافقة على الملاعب',
-        approveOwners: 'الموافقة على المالكين',
-        manageDisputes: 'إدارة النز��ع����',
-        analytics: 'التحليلات',
-        totalBookings: 'إجمالي الح���وزات',
-        revenue: 'الإيرادات',
-        demoMode: '⚠️ وض�� العرض التوضيحي - نظام د��ع ��وضيحي',
-        emirateName: 'الإما��ة',
-        areaName: 'المنطقة',
-        durationMin: 'دقيقة',
-        ratingStars: 'الت������يم',
-        reviewsCount: 'الت����لي����ات',
-        amenities: 'المرافق',
-        turf: 'نو�� العشب',
-        indoor: 'داخل���',
-        outdoor: 'خارجي',
-        selectSlots: 'ا��تر ���ترات ����منية',
-        confirm: 'تأكيد',
-        cancel: 'إلغاء',
-        delete: 'حذف',
-        edit: 'تعديل',
-        save: 'حفظ',
-        close: '��غلاق',
-        loading: 'جاري التحميل...',
-        error: 'خطأ',
-        success: 'نجح',
-        welcome: '����هلا و����هلا',
-        dontHaveAccount: 'ل��س لديك حساب؟',
-        haveAccount: 'هل لديك حساب بالفعل؟',
-        signUp: 'إن��اء حسا����',
-        signIn: 'تسجيل الدخول',
-        welcome_message: 'مرحبا ب�� في بيتش باص! 🎉',
-        bookField: 'احجز هذا الملعب',
-        viewDetails: 'عرض التفاصيل',
-        back: 'رج����ع',
-        forOwners: 'لأصحا�� الملاعب',
-        support: 'الدع��',
-        about: '����ول',
-        terms: 'الشروط',
-        copyright: '© 2025 بيتش باص. جميع الحقو�� محفو��ة.',
-        noFields: 'لا تو��د ��لاعب ��تا����ة',
-        hour: 'في ال����اعة',
-        showQRCode: 'عرض هذا الرمز في الملعب'
-      },
+
+  ar: {
+    appTitle: 'حجز كورة',
+    tagline: 'احجز ملعبك المثالي',
+    findFields: 'ابحث واحجز ملاعب كرة القدم في جميع إمارات الدولة',
+    description: 'من 5 ضد 5 إلى ملاعب كاملة • حجز فوري • أفضل الأسعار',
+    search: 'ابحث عن ملعب',
+    browse: 'تصفح الملاعب',
+    home: 'الرئيسية',
+    fields: 'الملاعب',
+    myBookings: 'حجوزاتي',
+    dashboard: 'لوحة التحكم',
+    admin: 'الإدارة',
+    login: 'تسجيل الدخول',
+    signup: 'إنشاء حساب',
+    logout: 'تسجيل الخروج',
+    email: 'البريد الإلكتروني',
+    password: 'كلمة المرور',
+    demoPasscode: 'رمز تجريبي',
+    demoPasscodeHint: 'هذا عرض تجريبي. لا تستخدم بيانات حقيقية.',
+    name: 'الاسم الكامل',
+    phone: 'رقم الهاتف',
+    iAm: 'أنا',
+    player: 'لاعب – حجز الملاعب',
+    owner: 'مالك ملعب – إضافة ملعب',
+    selectEmirate: 'اختر الإمارة',
+    selectArea: 'اختر المنطقة',
+    selectDate: 'اختر التاريخ',
+    selectDuration: 'المدة',
+    book: 'احجز الآن',
+    bookingConfirmed: 'تم تأكيد الحجز 🎉',
+    bookingCancelled: 'تم إلغاء الحجز',
+    price: 'السعر',
+    commission: 'عمولة 5%',
+    total: 'الإجمالي',
+    checkout: 'الدفع',
+    payNow: 'ادفع الآن',
+    QRCode: 'رمز الحجز QR',
+    bookingID: 'رقم الحجز',
+    fieldName: 'اسم الملعب',
+    date: 'التاريخ',
+    time: 'الوقت',
+    hour: 'لكل ساعة',
+    showQRCode: 'اعرض هذا الرمز عند الوصول'
+  },
       ur: {
-        appTitle: 'پچ پاس',
-        tagline: 'اپنا بہترین میدان بک کریں',
-        findFields: 'تمام 7 امارا������ می�� ف����� بال کے میدان ��لاش اور بک کریں',
-        description: '5 کے م��ابلے 5 سے مکمل میدان تک • فوری بکنگ • ��ہترین ق��م��یں',
-        search: 'میدان تلاش کریں',
-        browse: 'میدان براؤ�� کریں',
-        home: 'صفحہ ہوم',
-        fields: 'میدان',
-        myBookings: 'م����ری بکنگ',
-        dashboard: 'ڈیش بور��',
-        admin: 'ا��تظامی��',
-        login: 'لا�� ان',
-        signup: 'سائن ا��',
-        logout: 'ل��گ آ��ٹ',
-        email: 'ای میل',
-        password: '��ا�� ورڈ',
-        demoPasscode: 'ڈیمو پاس کوڈ',
-        demoPasscodeHint: 'یہ ایک ڈیمو ��ے۔ حقیقی اعتبارات استعمال نہ کریں۔',
-        name: 'مکمل ��ام',
-        phone: 'فون نمبر',
-        iAm: 'میں ہوں',
-        player: '��ھلاڑی - میدان بک کریں',
-        owner: 'میدان ک�� ��الک - اپنے میدان در�� ک��یں',
-        selectEmirate: 'امارہ منتخب کریں',
-        selectArea: '��لاقہ م��تخب کریں',
-        selectDate: 'تار��خ منتخب کریں',
-        selectDuration: 'مدت',
-        book: 'ابھی بک کریں',
-        bookingConfirmed: 'بکنگ تصدیق ��دہ! 🎉',
-        bookingCancelled: 'بکنگ منسوخ',
-        price: 'قیمت',
-        commission: '5% ک��یشن',
-        total: 'کل',
-        checkout: 'چیک آؤٹ',
-        payNow: 'اب ��دا کریں',
-        QRCode: 'بکنگ QR کوڈ',
-        bookingID: 'بکنگ ID',
-        fieldName: 'میدان کا نام',
-        date: 'تار������خ',
-        time: 'وقت',
-        upcomingBookings: 'آنے ����الی بکنگ',
-        pastBookings: 'ماض�� کی بک��گ',
-        noBookings: 'کوئی بکنگ نہیں',
-        startBooking: 'اپنی پہلی بکنگ شروع کریں!',
-        myFields: 'می��ے میدان',
-        addField: 'نیا ����دان شامل کریں',
-        fieldNameRequired: 'میدان ���� ��ام',
-        emirateRequired: 'امارہ',
-        areaRequired: 'علاقہ',
-        addressRequired: 'پتہ',
-        pitchSizeRequired: 'میدان کا ��ائز',
-        basePriceRequired: 'بنیادی قیمت (درہم)',
-        description: 'تف��یل',
-        rules: 'ا����ل',
-        submit: 'من��وری کے لیے جم���� کریں',
-        approvalPending: 'زیر التوا',
-        approved: 'منظور',
-        active: 'فعال',
-        inactive: 'غیر فعال',
-        earnings: 'کمائی',
-        pendingPayout: 'زیر التوا ادائیگ��',
-        adminPanel: 'انتظامی پین��',
-        approveFields: 'میدان ��ی منظوری',
-        approveOwners: 'مال��ین کی منظوری',
-        manageDisputes: '��نازعات کا انتظام',
-        analytics: 'تجزیا��',
-        totalBookings: 'ک�� بک����گز',
-        revenue: 'آم��نی',
-        demoMode: '⚠️ ������و مو��� - ڈیمو ادائیگی کا نظ��م',
-        emirateName: 'ا������ارہ',
-        areaName: 'علاقہ',
-        durationMin: 'منٹ',
-        ratingStars: '��یٹ��گ',
-        reviewsCount: 'جائ��ے',
-        amenities: '��ہولیات',
-        turf: 'گھاس کی قسم',
-        indoor: '��ندرونی',
-        outdoor: 'بیرون����',
-        selectSlots: 'وقت کے ��لاٹ منتخب کری����',
-        confirm: 'تصدیق',
-        cancel: 'م�����سو��',
-        delete: 'حذف',
-        edit: 'ترمی��',
-        save: 'محفوظ کریں',
-        close: 'بند کریں',
-        loading: 'لوڈ ہو رہا ہے...',
-        error: 'خرابی',
-        success: 'کامیاب',
-        welcome: '����ش ��م��ید',
-        dontHaveAccount: 'کیا آپ کے پاس حس��ب ��ہیں ہے؟',
-        haveAccount: 'کی���� آپ کے پاس پہلے سے حساب ہے؟',
-        signUp: 'سائن اپ',
-        signIn: '��ائن ا��',
-        welcome_message: 'پچ پاس میں خ��ش آم����ید! 🎉',
-        bookField: 'اس میدان ��و بک کر���ں',
-        viewDetails: '��فصیلات ��یکھیں',
-        back: 'واپس',
-        forOwners: '�����یدان ک���� مالکین کے ��یے',
-        support: '������ورٹ',
-        about: 'کے با��ے م����',
-        terms: 'شرائط',
-        copyright: '© 2025 پچ پاس۔ ��مام حقوق مح��وظ ہیں۔',
-        noFields: 'کوئی میدان ��ستیاب ن��یں',
-        hour: 'فی گھنٹہ',
-        showQRCode: 'یہ کوڈ ملعب میں دکھائیں'
-      }
-    };
+    appTitle: 'حجز کورا',
+    tagline: 'اپنا بہترین میدان بک کریں',
+    findFields: 'تمام امارات میں فٹبال کے میدان تلاش کریں اور بک کریں',
+    description: '5 بمقابلہ 5 سے مکمل میدان تک • فوری بکنگ • بہترین قیمتیں',
+    search: 'میدان تلاش کریں',
+    browse: 'میدان دیکھیں',
+    home: 'ہوم',
+    fields: 'میدان',
+    myBookings: 'میری بکنگ',
+    dashboard: 'ڈیش بورڈ',
+    admin: 'ایڈمن',
+    login: 'لاگ ان',
+    signup: 'سائن اپ',
+    logout: 'لاگ آؤٹ',
+    email: 'ای میل',
+    password: 'پاس ورڈ',
+    demoPasscode: 'ڈیمو کوڈ',
+    demoPasscodeHint: 'یہ ایک ڈیمو ہے۔ حقیقی معلومات استعمال نہ کریں۔',
+    name: 'پورا نام',
+    phone: 'فون نمبر',
+    iAm: 'میں ہوں',
+    player: 'کھلاڑی – میدان بک کریں',
+    owner: 'مالک – میدان شامل کریں',
+    selectEmirate: 'امارت منتخب کریں',
+    selectArea: 'علاقہ منتخب کریں',
+    selectDate: 'تاریخ منتخب کریں',
+    selectDuration: 'مدت',
+    book: 'ابھی بک کریں',
+    bookingConfirmed: 'بکنگ مکمل ہوگئی 🎉',
+    bookingCancelled: 'بکنگ منسوخ ہوگئی',
+    price: 'قیمت',
+    commission: '5٪ کمیشن',
+    total: 'کل',
+    checkout: 'ادائیگی',
+    payNow: 'اب ادا کریں',
+    QRCode: 'بکنگ QR کوڈ',
+    bookingID: 'بکنگ نمبر',
+    fieldName: 'میدان کا نام',
+    date: 'تاریخ',
+    time: 'وقت',
+    hour: 'فی گھنٹہ',
+    showQRCode: 'یہ کوڈ میدان پر دکھائیں'
+  }
+};
+
 
     function t(key) {
       return translations[currentLanguage]?.[key] || key;
+    }
+
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      localStorage.setItem('pitchpass_language', lang);
+      const dir = lang === 'ar' || lang === 'ur' ? 'rtl' : 'ltr';
+      document.documentElement.dir = dir;
+      document.documentElement.lang = lang;
+      render();
     }
 
     // UAE Data
@@ -650,13 +547,12 @@
               <button onclick="currentPage='fields';render()" class="hover:text-emerald-200">${t('fields')}</button>
               <button onclick="currentPage='support';render()" class="hover:text-emerald-200">💬 ${t('support')}</button>
               ${currentUser ? `<button onclick="currentPage='my-bookings';render()" class="hover:text-emerald-200">${t('myBookings')}</button>` : ''}
+              
+              <!-- Google Translate Widget -->
+              <div id="google_translate_element" style="display: inline-block;"></div>
             </nav>
 
-            <div class="flex items-center gap-2">
-              <button onclick="currentLanguage='en';document.documentElement.dir='ltr';render()" class="lang-btn ${currentLanguage === 'en' ? 'active' : ''}">EN</button>
-              <button onclick="currentLanguage='ar';document.documentElement.dir='rtl';render()" class="lang-btn ${currentLanguage === 'ar' ? 'active' : ''}">AR</button>
-              <button onclick="currentLanguage='ur';document.documentElement.dir='rtl';render()" class="lang-btn ${currentLanguage === 'ur' ? 'active' : ''}">UR</button>
-
+            <div class="flex items-center gap-3">
               ${currentUser ? `
                 <div class="flex items-center gap-2 ml-2">
                   <span class="text-sm hidden sm:inline">${currentUser.name}</span>
@@ -868,15 +764,24 @@
                 </div>
                 <div class="p-5">
                   <h4 class="font-bold text-lg mb-2">${field.fieldName}</h4>
-                  <p class="text-slate-500 text-sm mb-3">��� ${field.area}, ${field.emirate}</p>
-                  <div class="flex items-center justify-between text-xs text-slate-600 mb-3">
-                    <span>${field.pitchSize}</span>
-                    <span>${field.indoor ? t('indoor') : t('outdoor')}</span>
-                  </div>
-                  <div class="flex items-center justify-between pt-3 border-t border-slate-100">
-                    <span class="text-emerald-600 font-bold">AED ${field.basePrice}/hr</span>
-                    <button class="btn-primary text-white text-xs px-3 py-1 rounded">${t('book')}</button>
-                  </div>
+
+<p class="text-slate-500 text-sm mb-3">
+  📍 ${field.area}, ${field.emirate}
+</p>
+
+<div class="flex items-center justify-between text-xs text-slate-600 mb-3">
+  <span>${field.pitchSize}</span>
+  <span>${field.indoor ? t('indoor') : t('outdoor')}</span>
+</div>
+
+<div class="flex items-center justify-between pt-3 border-t border-slate-100">
+  <span class="text-emerald-600 font-bold">
+    AED ${field.basePrice}/hr
+  </span>
+  <button class="btn-primary text-white text-xs px-3 py-1 rounded">
+    ${t('book')}
+  </button>
+</div>
                 </div>
               </div>
             `).join('')}
@@ -911,8 +816,13 @@
       }
       
       return `
-        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
-          <button onclick="currentPage='fields';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '���' : '���'} ${t('back')}</button>
+       <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+  <button 
+    onclick="currentPage='fields';render()" 
+    class="mb-4 text-emerald-600 font-semibold"
+  >
+    ${dir === 'rtl' ? '→' : '←'} ${t('back')}
+  </button>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="md:col-span-2">
@@ -1191,7 +1101,7 @@
       return `
         <div class="max-w-2xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
           <div class="bg-white rounded-xl p-8 shadow-lg text-center">
-            <div class="text-5xl mb-4">��</div>
+            <div class="text-5xl mb-4">🎉</div>
             <h2 class="text-3xl font-bold mb-2">${t('bookingConfirmed')}</h2>
             
             <div class="bg-emerald-50 rounded-xl p-6 my-6">
@@ -1319,8 +1229,13 @@
       const areas = selectedEmirate ? uaeData[selectedEmirate] : [];
 
       return `
-        <div class="max-w-2xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
-          <button onclick="currentPage='owner-dashboard';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '→' : '←'} ${t('back')}</button>
+  <div class="max-w-2xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+    <button
+      onclick="currentPage='owner-dashboard';render()"
+      class="mb-4 text-emerald-600 font-semibold"
+    >
+      ${dir === 'rtl' ? '→' : '←'} ${t('back')}
+    </button>
           
           <div class="bg-white rounded-xl p-6 shadow-sm">
             <h2 class="text-2xl font-bold mb-6">${t('addField')}</h2>
@@ -1644,7 +1559,7 @@
         <div class="min-h-[80vh] flex items-center justify-center px-4 py-12 animate-fadeIn" dir="${dir}">
           <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
             <div class="text-center mb-8">
-              <div class="text-5xl mb-4">���</div>
+              <div class="text-5xl mb-4"></div>
               <h2 class="text-2xl font-bold">${isLogin ? t('login') : t('signup')}</h2>
             </div>
 
@@ -1846,15 +1761,38 @@
     function renderNotices() {
       const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
       
-      const notices = [
-        { id: 1, title: 'Peak Hours Alert', message: 'High demand on weekends 4-7 PM. Book early for availability.', date: '2 hours ago', icon: '📢' },
-        { id: 2, title: 'Maintenance Notification', message: 'Indoor Arena Sharjah will be closed for maintenance on 15th Dec.', date: '1 day ago', icon: '🔧' },
-        { id: 3, title: 'New Field Added', message: 'Marina Sports Lounge now available for bookings in Dubai.', date: '3 days ago', icon: '⭐' }
-      ];
-      
-      return `
-        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
-          <button onclick="currentPage='landing';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '→' : '�����'} Back</button>
+     const notices = [
+  {
+    id: 1,
+    title: 'Peak Hours Alert',
+    message: 'High demand on weekends 4–7 PM. Book early for availability.',
+    date: '2 hours ago',
+    icon: '📢'
+  },
+  {
+    id: 2,
+    title: 'Maintenance Notification',
+    message: 'Indoor Arena Sharjah will be closed for maintenance on 15th Dec.',
+    date: '1 day ago',
+    icon: '🔧'
+  },
+  {
+    id: 3,
+    title: 'New Field Added',
+    message: 'Marina Sports Lounge now available for bookings in Dubai.',
+    date: '3 days ago',
+    icon: '➕' // fixed
+  }
+];
+
+return `
+  <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+    <button
+      onclick="currentPage='landing';render()"
+      class="mb-4 text-emerald-600 font-semibold"
+    >
+      ${dir === 'rtl' ? '→' : '←'} Back
+    </button>
           
           <h1 class="text-3xl font-bold mb-6">Notices & Announcements</h1>
           
@@ -1899,10 +1837,10 @@
               <div class="bg-white rounded-xl overflow-hidden shadow-lg flex flex-col h-[600px]">
                 <!-- Header -->
                 <div class="gradient-bg text-white p-4 flex items-center gap-3">
-                  <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl">��</div>
+                  <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl">hi</div>
                   <div>
                     <h3 class="font-bold">HajzKoora Support</h3>
-                    <p class="text-xs text-emerald-100">�������� Online - Average response: 2 min</p>
+                    <p class="text-xs text-emerald-100">Currently Online - Average response: 2 min</p>
                   </div>
                 </div>
 
@@ -1929,7 +1867,6 @@
                   <form onsubmit="sendSupportMessage(event)" class="flex gap-2">
                     <input type="text" id="support-message" placeholder="Type your message..." class="flex-1 px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-600" required>
                     <button type="submit" class="btn-primary text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
-                      ���
                     </button>
                   </form>
                 </div>
@@ -1941,7 +1878,7 @@
               <div class="space-y-4">
                 <!-- Quick Info -->
                 <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-4 border-l-4 border-emerald-600">
-                  <h4 class="font-bold mb-2">�� Contact Info</h4>
+                  <h4 class="font-bold mb-2">Contact Info</h4>
                   <p class="text-sm text-slate-700 mb-2">
                     <strong>Email:</strong><br/>
                     HajzkooraAE@gmail.com
@@ -2017,7 +1954,7 @@
           'We\'re here to help!',
           'I\'ll check that for you.',
           'Great question! Let me find that info.',
-          'We appreciate your feedback! 🙌'
+          'We appreciate your feedback! '
         ];
         
         messages.push({
@@ -2120,8 +2057,12 @@
 
     // Initialize
     async function init() {
-      document.documentElement.dir = 'ltr';
-      document.documentElement.lang = 'en';
+      // Load saved language
+      const savedLanguage = localStorage.getItem('pitchpass_language') || 'en';
+      currentLanguage = savedLanguage;
+      const dir = savedLanguage === 'ar' || savedLanguage === 'ur' ? 'rtl' : 'ltr';
+      document.documentElement.dir = dir;
+      document.documentElement.lang = savedLanguage;
 
       if (window.dataSdk) {
         const result = await window.dataSdk.init(dataHandler);
@@ -2138,4 +2079,5 @@
 
     init();
   </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cc5e25e50fec369',t:'MTc3MDgzNDI3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
