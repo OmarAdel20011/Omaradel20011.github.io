@@ -13,11 +13,11 @@
     body { box-sizing: border-box; }
     html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
     * { margin: 0; padding: 0; }
-    .gradient-bg { background: linear-gradient(135deg, #064e3b 0%, #047857 100%); }
+    .gradient-bg { background: linear-gradient(135deg, #0d4d3d 0%, #e74c3c 50%, #f39c12 100%); }
     .card-hover { transition: all 0.3s ease; }
-    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-    .btn-primary { background: #059669; transition: all 0.2s; }
-    .btn-primary:hover { background: #047857; transform: scale(1.02); }
+    .card-hover:hover { transform: translateY(-12px) scale(1.05); box-shadow: 0 30px 60px rgba(231, 76, 60, 0.3); border-color: #e74c3c; }
+    .btn-primary { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); transition: all 0.2s; box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4); }
+    .btn-primary:hover { background: linear-gradient(135deg, #f44336 0%, #e74c3c 100%); transform: scale(1.08); box-shadow: 0 12px 30px rgba(231, 76, 60, 0.6); }
     .btn-secondary { background: #e5e7eb; color: #374151; transition: all 0.2s; }
     .btn-secondary:hover { background: #d1d5db; }
     .lang-btn { padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
@@ -174,219 +174,220 @@
         copyright: '© 2025 PitchPass UAE. All rights reserved.',
         noFields: 'No fields available',
         hour: 'per hour',
-        showQRCode: 'Show this code at the venue'
+        showQRCode: 'Show this code at the venue',
+        location: 'Location'
       },
       ar: {
         appTitle: 'بيتش باص',
         tagline: 'احجز ملعبك المثالي',
-        findFields: 'ابحث واحجز ملاعب كرة قدم في جم���ع أنحاء الإمارات السبع',
-        description: 'من 5 ضد 5 إلى الملاعب ��لكاملة • حجز فوري • أفضل الأسعار',
+        findFields: 'ابحث واحجز ملاعب ك����ة قدم في ��م���ع أنح��ء الإمارات السبع',
+        description: 'من 5 ضد 5 إلى الملاعب ����لكاملة • حجز فوري • أفض�� الأسعار',
         search: 'البحث عن الملاعب',
-        browse: 'تصفح الملاعب',
+        browse: 'تصف���� الملاعب',
         home: 'الرئيسية',
         fields: 'الملاعب',
-        myBookings: 'حجوزاتي',
-        dashboard: 'ل��حة ال��حكم',
+        myBookings: 'حجو��اتي',
+        dashboard: 'ل��������ة ال������حكم',
         admin: 'الإدارة',
         login: 'تسجيل الدخول',
-        signup: 'إنشاء حساب',
-        logout: 'تسجيل الخروج',
-        email: 'البريد الإلكتروني',
+        signup: 'إن��اء حساب',
+        logout: 'تسجيل الخ����ج',
+        email: 'البريد ا��إل��ترو��ي',
         password: 'كلمة المرور',
         demoPasscode: 'رمز الديمو',
-        demoPasscodeHint: 'هذا عرض توضيحي. لا تستخ����م بيانات حقيقية.',
-        name: 'الاسم الكامل',
+        demoPasscodeHint: 'هذا عرض توض��ح��. لا تستخ����م بيانات حقيقية.',
+        name: 'ال������سم الكامل',
         phone: 'رقم الهاتف',
-        iAm: 'أنا',
-        player: 'لاعب - احجز ملاعب',
-        owner: 'مالك مل��ب - أدرج ملاعبك',
-        selectEmirate: 'اختر إمارة',
+        iAm: '����نا',
+        player: 'لاعب - ��حجز ملاعب',
+        owner: 'مالك مل�������������ب - أدرج ملاعب��',
+        selectEmirate: 'ا��تر إمارة',
         selectArea: 'اختر منطقة',
         selectDate: 'اختر التاريخ',
         selectDuration: 'المدة',
         book: 'احجز الآن',
         bookingConfirmed: 'تم تأكيد الحجز! 🎉',
-        bookingCancelled: 'تم إلغاء الحجز',
+        bookingCancelled: 'تم ��لغاء الحجز',
         price: 'السعر',
-        commission: 'عمولة 5%',
-        total: 'المجموع',
-        checkout: 'الدفع',
+        commission: 'عم����لة 5%',
+        total: 'الم��موع',
+        checkout: 'الد��ع',
         payNow: 'ادفع الآن',
         QRCode: 'رمز QR للحجز',
         bookingID: 'معرف الحجز',
-        fieldName: 'اسم الملعب',
-        date: 'التاريخ',
-        time: 'الوقت',
+        fieldName: 'اسم ال��لعب',
+        date: 'ا��تاري��',
+        time: 'ال������ت',
         upcomingBookings: 'الحجوزات القادمة',
         pastBookings: 'الحجوزات السابقة',
         noBookings: 'لا توجد حجوزات',
-        startBooking: 'ابدأ بحجز ملعبك الأول!',
+        startBooking: 'ابدأ بحجز ملعبك ال����ل!',
         myFields: 'ملاعبي',
-        addField: 'إضافة ملعب جديد',
+        addField: 'إ��ا��ة ملعب جديد',
         fieldNameRequired: 'اسم الملعب',
         emirateRequired: 'الإمارة',
         areaRequired: 'المنطقة',
-        addressRequired: 'العنوان',
+        addressRequired: 'ال��نوان',
         pitchSizeRequired: 'حجم الملعب',
-        basePriceRequired: 'السعر الأساسي (درهم)',
-        description: 'الوصف',
+        basePriceRequired: 'السعر ال��ساسي (درهم)',
+        description: 'الو����ف',
         rules: 'القواعد',
         submit: 'إرسال للموافقة',
-        approvalPending: 'قيد الانتظار',
-        approved: 'موافق عليه',
+        approvalPending: 'قيد ا��انتظار',
+        approved: '��وافق عليه',
         active: 'نشط',
-        inactive: 'غير نشط',
+        inactive: '��ير نشط',
         earnings: 'الأرباح',
         pendingPayout: 'الدفع المعلق',
         adminPanel: 'لوحة الإدارة',
         approveFields: 'الموافقة على الملاعب',
         approveOwners: 'الموافقة على المالكين',
-        manageDisputes: 'إدارة النزاعات',
+        manageDisputes: 'إدارة النز��ع����',
         analytics: 'التحليلات',
-        totalBookings: 'إجمالي الحجوزات',
+        totalBookings: 'إجمالي الح���وزات',
         revenue: 'الإيرادات',
-        demoMode: '⚠️ وضع العرض التوضيحي - نظام دفع ��وضيحي',
+        demoMode: '⚠️ وض�� العرض التوضيحي - نظام د��ع ��وضيحي',
         emirateName: 'الإما��ة',
         areaName: 'المنطقة',
         durationMin: 'دقيقة',
-        ratingStars: 'التقييم',
-        reviewsCount: 'التعليقات',
+        ratingStars: 'الت������يم',
+        reviewsCount: 'الت����لي����ات',
         amenities: 'المرافق',
-        turf: 'نوع العشب',
-        indoor: 'داخلي',
+        turf: 'نو�� العشب',
+        indoor: 'داخل���',
         outdoor: 'خارجي',
-        selectSlots: 'اختر فترات زمنية',
+        selectSlots: 'ا��تر ���ترات ����منية',
         confirm: 'تأكيد',
         cancel: 'إلغاء',
         delete: 'حذف',
         edit: 'تعديل',
         save: 'حفظ',
-        close: 'إغلاق',
+        close: '��غلاق',
         loading: 'جاري التحميل...',
         error: 'خطأ',
         success: 'نجح',
-        welcome: 'أهلا وسهلا',
-        dontHaveAccount: 'ليس لديك حساب؟',
+        welcome: '����هلا و����هلا',
+        dontHaveAccount: 'ل��س لديك حساب؟',
         haveAccount: 'هل لديك حساب بالفعل؟',
-        signUp: 'إنشاء حساب',
+        signUp: 'إن��اء حسا����',
         signIn: 'تسجيل الدخول',
-        welcome_message: 'مرحبا بك في بيتش باص! 🎉',
+        welcome_message: 'مرحبا ب�� في بيتش باص! 🎉',
         bookField: 'احجز هذا الملعب',
         viewDetails: 'عرض التفاصيل',
-        back: 'رجوع',
+        back: 'رج����ع',
         forOwners: 'لأصحا�� الملاعب',
-        support: 'الدعم',
-        about: 'حول',
+        support: 'الدع��',
+        about: '����ول',
         terms: 'الشروط',
-        copyright: '© 2025 بيتش باص. جميع الحقوق محفوظة.',
-        noFields: 'لا توجد ملاعب متاحة',
-        hour: 'في الساعة',
+        copyright: '© 2025 بيتش باص. جميع الحقو�� محفو��ة.',
+        noFields: 'لا تو��د ��لاعب ��تا����ة',
+        hour: 'في ال����اعة',
         showQRCode: 'عرض هذا الرمز في الملعب'
       },
       ur: {
         appTitle: 'پچ پاس',
         tagline: 'اپنا بہترین میدان بک کریں',
-        findFields: 'تمام 7 امارات میں فٹ بال کے میدان تلاش اور بک کریں',
-        description: '5 کے مقابلے 5 سے مکمل میدان تک • فوری بکنگ • بہترین قیمتیں',
+        findFields: 'تمام 7 امارا������ می�� ف����� بال کے میدان ��لاش اور بک کریں',
+        description: '5 کے م��ابلے 5 سے مکمل میدان تک • فوری بکنگ • ��ہترین ق��م��یں',
         search: 'میدان تلاش کریں',
-        browse: 'میدان براؤز کریں',
+        browse: 'میدان براؤ�� کریں',
         home: 'صفحہ ہوم',
         fields: 'میدان',
-        myBookings: 'میری بکنگ',
-        dashboard: 'ڈیش بورڈ',
-        admin: 'انتظامیہ',
+        myBookings: 'م����ری بکنگ',
+        dashboard: 'ڈیش بور��',
+        admin: 'ا��تظامی��',
         login: 'لا�� ان',
         signup: 'سائن ا��',
-        logout: 'لاگ آؤٹ',
+        logout: 'ل��گ آ��ٹ',
         email: 'ای میل',
-        password: 'پاس ورڈ',
+        password: '��ا�� ورڈ',
         demoPasscode: 'ڈیمو پاس کوڈ',
-        demoPasscodeHint: 'یہ ایک ڈیمو ہے۔ حقیقی اعتبارات استعمال نہ کریں۔',
-        name: 'مکمل نام',
+        demoPasscodeHint: 'یہ ایک ڈیمو ��ے۔ حقیقی اعتبارات استعمال نہ کریں۔',
+        name: 'مکمل ��ام',
         phone: 'فون نمبر',
         iAm: 'میں ہوں',
-        player: 'کھلاڑی - میدان بک کریں',
-        owner: 'میدان کا مالک - اپنے میدان درج کریں',
+        player: '��ھلاڑی - میدان بک کریں',
+        owner: 'میدان ک�� ��الک - اپنے میدان در�� ک��یں',
         selectEmirate: 'امارہ منتخب کریں',
-        selectArea: 'علاقہ منتخب کریں',
+        selectArea: '��لاقہ م��تخب کریں',
         selectDate: 'تار��خ منتخب کریں',
         selectDuration: 'مدت',
         book: 'ابھی بک کریں',
-        bookingConfirmed: 'بکنگ تصدیق شدہ! 🎉',
+        bookingConfirmed: 'بکنگ تصدیق ��دہ! 🎉',
         bookingCancelled: 'بکنگ منسوخ',
         price: 'قیمت',
-        commission: '5% کمیشن',
+        commission: '5% ک��یشن',
         total: 'کل',
         checkout: 'چیک آؤٹ',
         payNow: 'اب ��دا کریں',
         QRCode: 'بکنگ QR کوڈ',
         bookingID: 'بکنگ ID',
         fieldName: 'میدان کا نام',
-        date: 'تاریخ',
+        date: 'تار������خ',
         time: 'وقت',
-        upcomingBookings: 'آنے والی بکنگ',
-        pastBookings: 'ماضی کی بکنگ',
+        upcomingBookings: 'آنے ����الی بکنگ',
+        pastBookings: 'ماض�� کی بک��گ',
         noBookings: 'کوئی بکنگ نہیں',
         startBooking: 'اپنی پہلی بکنگ شروع کریں!',
-        myFields: 'میرے میدان',
-        addField: 'نیا میدان شامل کریں',
-        fieldNameRequired: 'میدان ���� نام',
+        myFields: 'می��ے میدان',
+        addField: 'نیا ����دان شامل کریں',
+        fieldNameRequired: 'میدان ���� ��ام',
         emirateRequired: 'امارہ',
         areaRequired: 'علاقہ',
         addressRequired: 'پتہ',
-        pitchSizeRequired: 'میدان کا سائز',
+        pitchSizeRequired: 'میدان کا ��ائز',
         basePriceRequired: 'بنیادی قیمت (درہم)',
-        description: 'تفصیل',
-        rules: 'اصول',
-        submit: 'منظوری کے لیے جمع کریں',
+        description: 'تف��یل',
+        rules: 'ا����ل',
+        submit: 'من��وری کے لیے جم���� کریں',
         approvalPending: 'زیر التوا',
         approved: 'منظور',
         active: 'فعال',
         inactive: 'غیر فعال',
         earnings: 'کمائی',
-        pendingPayout: 'زیر التوا ادائیگی',
-        adminPanel: 'انتظامی پینل',
-        approveFields: 'میدان کی منظوری',
-        approveOwners: 'مالکین کی منظوری',
-        manageDisputes: 'تنازعات کا انتظام',
-        analytics: 'تجزیات',
-        totalBookings: 'کل بکنگز',
-        revenue: 'آمدنی',
-        demoMode: '⚠️ ڈیمو مو�� - ڈیمو ادائیگی کا نظ��م',
-        emirateName: 'امارہ',
+        pendingPayout: 'زیر التوا ادائیگ��',
+        adminPanel: 'انتظامی پین��',
+        approveFields: 'میدان ��ی منظوری',
+        approveOwners: 'مال��ین کی منظوری',
+        manageDisputes: '��نازعات کا انتظام',
+        analytics: 'تجزیا��',
+        totalBookings: 'ک�� بک����گز',
+        revenue: 'آم��نی',
+        demoMode: '⚠️ ������و مو��� - ڈیمو ادائیگی کا نظ��م',
+        emirateName: 'ا������ارہ',
         areaName: 'علاقہ',
         durationMin: 'منٹ',
-        ratingStars: 'ریٹنگ',
-        reviewsCount: 'جائزے',
-        amenities: 'سہولیات',
+        ratingStars: '��یٹ��گ',
+        reviewsCount: 'جائ��ے',
+        amenities: '��ہولیات',
         turf: 'گھاس کی قسم',
         indoor: '��ندرونی',
-        outdoor: 'بیرونی',
-        selectSlots: 'وقت کے سلاٹ منتخب کریں',
+        outdoor: 'بیرون����',
+        selectSlots: 'وقت کے ��لاٹ منتخب کری����',
         confirm: 'تصدیق',
-        cancel: 'منسوخ',
+        cancel: 'م�����سو��',
         delete: 'حذف',
-        edit: 'ترمیم',
+        edit: 'ترمی��',
         save: 'محفوظ کریں',
         close: 'بند کریں',
         loading: 'لوڈ ہو رہا ہے...',
         error: 'خرابی',
         success: 'کامیاب',
-        welcome: 'خوش آمدید',
-        dontHaveAccount: 'کیا آپ کے پاس حساب نہیں ہے؟',
-        haveAccount: 'کیا آپ کے پاس پہلے سے حساب ہے؟',
+        welcome: '����ش ��م��ید',
+        dontHaveAccount: 'کیا آپ کے پاس حس��ب ��ہیں ہے؟',
+        haveAccount: 'کی���� آپ کے پاس پہلے سے حساب ہے؟',
         signUp: 'سائن اپ',
-        signIn: 'سائن ان',
-        welcome_message: 'پچ پاس میں خوش آم��ید! 🎉',
-        bookField: 'اس میدان کو بک کریں',
-        viewDetails: 'تفصیلات دیکھیں',
+        signIn: '��ائن ا��',
+        welcome_message: 'پچ پاس میں خ��ش آم����ید! 🎉',
+        bookField: 'اس میدان ��و بک کر���ں',
+        viewDetails: '��فصیلات ��یکھیں',
         back: 'واپس',
-        forOwners: '��یدان کے مالکین کے لیے',
-        support: '��پورٹ',
-        about: 'کے بارے م��ں',
+        forOwners: '�����یدان ک���� مالکین کے ��یے',
+        support: '������ورٹ',
+        about: 'کے با��ے م����',
         terms: 'شرائط',
-        copyright: '© 2025 پچ پاس۔ تمام حقوق محفوظ ہیں۔',
-        noFields: 'کوئی میدان ��ستیاب نہیں',
+        copyright: '© 2025 پچ پاس۔ ��مام حقوق مح��وظ ہیں۔',
+        noFields: 'کوئی میدان ��ستیاب ن��یں',
         hour: 'فی گھنٹہ',
         showQRCode: 'یہ کوڈ ملعب میں دکھائیں'
       }
@@ -401,7 +402,7 @@
       'Abu Dhabi': ['Al Reem Island', 'Khalifa City', 'Al Mushrif', 'Yas Island', 'Al Ain'],
       'Dubai': ['Al Quoz', 'Sports City', 'JLT', 'Al Barsha', 'Dubai Marina'],
       'Sharjah': ['Al Nahda', 'Al Majaz', 'Industrial Area', 'Al Khan'],
-      'Ajman': ['Al Nuaimiya', 'Al Rashidiya', 'Emirates City'],
+      'Ajman': ['Al Nuaimiya', 'Rashidya 1', 'Rashidya 2', 'Emirates City', 'Jurf', 'Hamidyah 1', 'Hamidyah 2', 'Safia'],
       'Ras Al Khaimah': ['Al Nakheel', 'Al Hamra', 'Khuzam'],
       'Fujairah': ['Al Faseel', 'Dibba', 'Masafi'],
       'Umm Al Quwain': ['Old Town', 'Al Salamah', 'Al Raas']
@@ -430,12 +431,19 @@
       { type: 'field', id: 'f2', fieldName: 'Al Quoz Sports Hub', emirate: 'Dubai', area: 'Al Quoz', address: 'Al Quoz Industrial', latitude: 25.1381, longitude: 55.2367, pitchSvg: 2, amenities: 'Parking,Floodlights', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 450, ownerId: 'owner1', active: true, approved: true, description: 'Modern 7-a-side pitch', rules: 'No loud music', createdAt: new Date().toISOString() },
       { type: 'field', id: 'f3', fieldName: 'Capital Football Center', emirate: 'Abu Dhabi', area: 'Khalifa City', address: 'Khalifa City A', latitude: 24.4284, longitude: 54.5767, pitchSvg: 3, amenities: 'Parking,Showers,Cafeteria', pitchSize: '11v11', indoor: false, turfType: 'Hybrid', basePrice: 900, ownerId: 'owner2', active: true, approved: true, description: 'State-of-the-art facility', rules: 'Professional conduct', createdAt: new Date().toISOString() },
       { type: 'field', id: 'f4', fieldName: 'Indoor Arena Sharjah', emirate: 'Sharjah', area: 'Al Nahda', address: 'Al Nahda Street', latitude: 25.3134, longitude: 55.3765, pitchSvg: 4, amenities: 'Parking,AC,Showers', pitchSize: '5v5', indoor: true, turfType: 'Artificial Turf', basePrice: 350, ownerId: 'owner3', active: true, approved: true, description: 'Climate-controlled facility', rules: 'Indoor shoes only', createdAt: new Date().toISOString() },
-      { type: 'field', id: 'f5', fieldName: 'Ajman Sports Complex', emirate: 'Ajman', area: 'Al Nuaimiya', address: 'Al Nuaimiya', latitude: 25.4052, longitude: 55.4437, pitchSvg: 5, amenities: 'Parking,Floodlights', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 300, ownerId: 'owner4', active: true, approved: true, description: 'Family-friendly pitch', rules: 'Safe environment', createdAt: new Date().toISOString() },
+
       { type: 'field', id: 'f6', fieldName: 'RAK Football Village', emirate: 'Ras Al Khaimah', area: 'Al Hamra', address: 'Al Hamra Village', latitude: 25.6836, longitude: 55.7883, pitchSvg: 6, amenities: 'Parking,Showers,Cafeteria', pitchSize: '11v11', indoor: false, turfType: 'Natural Grass', basePrice: 600, ownerId: 'owner5', active: true, approved: true, description: 'Beachside location', rules: 'Respect wildlife', createdAt: new Date().toISOString() },
       { type: 'field', id: 'f7', fieldName: 'Fujairah FC Ground', emirate: 'Fujairah', area: 'Al Faseel', address: 'Al Faseel Road', latitude: 25.1288, longitude: 56.3266, pitchSvg: 7, amenities: 'Parking,Floodlights,First Aid', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 280, ownerId: 'owner6', active: true, approved: true, description: 'Mountain backdrop', rules: 'Check weather', createdAt: new Date().toISOString() },
       { type: 'field', id: 'f8', fieldName: 'UAQ Community Pitch', emirate: 'Umm Al Quwain', area: 'Old Town', address: 'Old Town', latitude: 25.5647, longitude: 55.5533, pitchSvg: 8, amenities: 'Parking,Water Cooler', pitchSize: '5v5', indoor: false, turfType: 'Artificial Turf', basePrice: 200, ownerId: 'owner7', active: true, approved: true, description: 'Community pitch', rules: 'Respect others', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f11', fieldName: 'Football Ground Ajman', emirate: 'Ajman', area: 'Jurf', address: 'Jurf, Ajman', latitude: 25.3700, longitude: 55.4500, photoUrl: 'https://lh3.googleusercontent.com/gps-cs-s/AHVAweoNXefpFwWvpseySaF1ziagLLTSv6fuFzEqlosR6Tp3fAh6L1pBp4mSBbimMC6JswLgcW0Fg9Sy9UBYD-xvPrWLQ_K1pvTdWKr9P1Dd_yhN_C9COXYcaaBKcXNpOoV_3bj2qDrD=s1360-w1360-h1020-rw', pitchSvg: 5, amenities: 'Parking,Floodlights,Showers', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 320, ownerId: 'owner8', active: true, approved: true, description: 'Modern football ground with excellent facilities', rules: 'Professional conduct required', locationUrl: 'https://share.google/pzNNfoVjUcQN00CBm', createdAt: new Date().toISOString() },
       { type: 'field', id: 'f9', fieldName: 'Marina Sports Lounge', emirate: 'Dubai', area: 'Dubai Marina', address: 'Dubai Marina Walk', latitude: 25.0805, longitude: 55.1403, pitchSvg: 9, amenities: 'Parking,Showers,Cafeteria,AC', pitchSize: '5v5', indoor: true, turfType: 'Artificial Turf', basePrice: 500, ownerId: 'owner1', active: true, approved: true, description: 'Premium facility with marina views', rules: 'Advance booking required', createdAt: new Date().toISOString() },
-      { type: 'field', id: 'f10', fieldName: 'Al Ain Oasis Arena', emirate: 'Abu Dhabi', area: 'Al Ain', address: 'Al Ain City Center', latitude: 24.2075, longitude: 55.7447, pitchSvg: 10, amenities: 'Parking,Showers,Cafeteria,Floodlights', pitchSize: '11v11', indoor: false, turfType: 'Natural Grass', basePrice: 550, ownerId: 'owner2', active: true, approved: true, description: 'Beautiful green setting', rules: 'No plastic bottles', createdAt: new Date().toISOString() }
+      { type: 'field', id: 'f10', fieldName: 'Al Ain Oasis Arena', emirate: 'Abu Dhabi', area: 'Al Ain', address: 'Al Ain City Center', latitude: 24.2075, longitude: 55.7447, pitchSvg: 10, amenities: 'Parking,Showers,Cafeteria,Floodlights', pitchSize: '11v11', indoor: false, turfType: 'Natural Grass', basePrice: 550, ownerId: 'owner2', active: true, approved: true, description: 'Beautiful green setting', rules: 'No plastic bottles', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f12', fieldName: 'Al Qemma Stadium', emirate: 'Ajman', area: 'Rashidya 2', address: 'Rashidya 2, Ajman', latitude: 25.3850, longitude: 55.4600, photoUrl: 'https://lh3.googleusercontent.com/gps-cs-s/AHVAwer_2i2l1I9ueZdR_yv8kKgao7U1lVJWkr4xsx13mq0vtePuYB4phY-Cbr7d77ozb-tSbDxbKDmPc52OT8qE4mr8eYM5b_DjEtkzWPAEqB6RqCFNOJL16HnhIHTxJhzKi8CQje2asA=s1360-w1360-h1020-rw', pitchSvg: 5, amenities: 'Parking,Floodlights,Showers,Cafeteria', pitchSize: '11v11', indoor: false, turfType: 'Hybrid', basePrice: 550, ownerId: 'owner9', active: true, approved: true, description: 'Premium stadium with professional facilities and excellent lighting', rules: 'Professional conduct required', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f13', fieldName: 'Quattro Sport Center', emirate: 'Ajman', area: 'Safia', address: 'Safia, Ajman', latitude: 25.3900, longitude: 55.4700, photoUrl: 'https://lh3.googleusercontent.com/p/AF1QipONsWuDxVSusY5nxPnB_kNRcJwvGF8BX7t5xEYS=s1360-w1360-h1020-rw', pitchSvg: 5, amenities: 'Parking,Floodlights,Showers,Cafeteria,AC', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 400, ownerId: 'owner10', active: true, approved: true, description: 'Modern sports center with top-tier facilities and comfortable amenities', rules: 'No aggressive play', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f14', fieldName: 'Malaaeb Ajman', emirate: 'Ajman', area: 'Rashidya 1', address: 'Rashidya 1, Ajman', latitude: 25.3800, longitude: 55.4550, photoUrl: 'https://lh3.googleusercontent.com/gps-cs-s/AHVAwerWNVC0fQaYRQlFU4S8C9j7vnZIRaKfgiMHmIqHcxYpJMpJuHoNg7b23ULeMrhPyRWrlVXDUtwmXplsX-x2cRT91JC2zHLSKFFh0X7ymvYRzS-VEr3nwkyPbWTsZC0c8gzeO1RJyP2QXDo=w520-h350-n-k-no', pitchSvg: 5, amenities: 'Parking,Floodlights,Showers', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 350, ownerId: 'owner11', active: true, approved: true, description: 'Quality football facility with excellent lighting and modern amenities', rules: 'Respect equipment', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f15', fieldName: 'Ajman Sports Club', emirate: 'Ajman', area: 'Rashidya 2', address: 'Rashidya 2, Ajman', latitude: 25.3900, longitude: 55.4650, photoUrl: 'https://lh3.googleusercontent.com/gps-cs-s/AHVAwepI8MDwee1JXm9916uNQjkLwIhmSsW1ZdrC6D9uOUhyOgw0H7gVa8ySSLS7aHs61EDfDb-7UyhqPuYyq1tjYZ5Y2TFDbSN1UVkYfPmNcvxqXZ0zhvv-TexWFtvlvFIg7DM1vjm3=s1360-w1360-h1020-rw', pitchSvg: 5, amenities: 'Parking,Floodlights,Showers,Cafeteria', pitchSize: '11v11', indoor: false, turfType: 'Natural Grass', basePrice: 480, ownerId: 'owner12', active: true, approved: true, description: 'Professional sports club with premium facilities and well-maintained pitch', rules: 'Follow club guidelines', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f16', fieldName: 'Altanafus ملاعب التنافس', emirate: 'Ajman', area: 'Hamidyah 2', address: 'Hamidyah 2, Ajman', latitude: 25.3750, longitude: 55.4700, photoUrl: 'https://lh3.googleusercontent.com/gps-cs-s/AHVAweqGfHT49FPf2I-VuVCm6dBO1mLTsqNcMV7hWegIuFu_K058KgrhwUJxLwRHVg0Oq7MBdpByfbt3IIKMUdNPrGBPqnBJ4Vs4ZVyF08xw-S-iDcNIqu17GIe6c6vn-V9ei7BF4eAn=s1360-w1360-h1020-rw', pitchSvg: 5, amenities: 'Parking,Floodlights,Showers,Cafeteria,First Aid', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 380, ownerId: 'owner13', active: true, approved: true, description: 'Modern competition-grade football pitch with professional lighting and amenities', rules: 'Professional standards enforced', createdAt: new Date().toISOString() },
+      { type: 'field', id: 'f17', fieldName: 'Clasico Football Ground Ajman', emirate: 'Ajman', area: 'Hamidyah 1', address: 'Hamidyah 1, Ajman', latitude: 25.3700, longitude: 55.4650, photoUrl: 'https://lh3.googleusercontent.com/p/AF1QipM-2JcgciIEFQk6fM2J_zWcDmGpVca-V8rrHB8f=w520-h350-n-k-no', pitchSvg: 5, amenities: 'Parking,Floodlights,Showers,Cafeteria', pitchSize: '7v7', indoor: false, turfType: 'Artificial Turf', basePrice: 360, ownerId: 'owner14', active: true, approved: true, description: 'Premium football ground with excellent facilities and professional-grade turf', rules: 'Respect equipment and facility', createdAt: new Date().toISOString() }
     ];
 
     // Data SDK Handler
@@ -640,6 +648,7 @@
             <nav class="hidden md:flex items-center gap-6 text-sm">
               <button onclick="currentPage='landing';render()" class="hover:text-emerald-200">${t('home')}</button>
               <button onclick="currentPage='fields';render()" class="hover:text-emerald-200">${t('fields')}</button>
+              <button onclick="currentPage='support';render()" class="hover:text-emerald-200">💬 ${t('support')}</button>
               ${currentUser ? `<button onclick="currentPage='my-bookings';render()" class="hover:text-emerald-200">${t('myBookings')}</button>` : ''}
             </nav>
 
@@ -673,12 +682,83 @@
       
       return `
         <div class="w-full animate-fadeIn" dir="${dir}">
-          <section class="bg-amber-50 border-b-2 border-amber-200 px-4 py-3 text-center">
-            <p class="text-amber-900 text-sm font-medium">⚠️ Demo only — accounts, bookings, and payments are simulated.</p>
-          </section>
 
-          <section class="gradient-bg text-white py-16 px-4">
-            <div class="max-w-4xl mx-auto text-center">
+
+          <section class="relative text-white py-16 px-4 overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.85), rgba(4, 120, 87, 0.85)), url('https://static.independent.co.uk/s3fs-public/thumbnails/image/2018/03/29/16/mohamed-salah.jpg') center/cover no-repeat; min-height: 400px; display: flex; align-items: center;">
+            <svg class="absolute inset-0 w-full h-full hidden" style="pointer-events: none; display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+              <defs>
+                <style>
+                  @keyframes kickBall {
+                    0% { transform: translateX(0px) translateY(0px); }
+                    25% { transform: translateX(150px) translateY(-80px); }
+                    50% { transform: translateX(300px) translateY(0px); }
+                    75% { transform: translateX(450px) translateY(-40px); }
+                    100% { transform: translateX(600px) translateY(0px); }
+                  }
+                  @keyframes runKid {
+                    0% { transform: translateX(0px); }
+                    50% { transform: translateX(600px); }
+                    100% { transform: translateX(600px); }
+                  }
+                  @keyframes legSwing {
+                    0%, 100% { transform: rotateZ(0deg); transform-origin: 50% 30%; }
+                    25% { transform: rotateZ(-45deg); transform-origin: 50% 30%; }
+                    50% { transform: rotateZ(0deg); transform-origin: 50% 30%; }
+                  }
+                  @keyframes armSwing {
+                    0%, 100% { transform: rotateZ(0deg); transform-origin: 50% 10%; }
+                    25% { transform: rotateZ(35deg); transform-origin: 50% 10%; }
+                    50% { transform: rotateZ(-20deg); transform-origin: 50% 10%; }
+                  }
+                  .kid-group { animation: runKid 8s infinite; }
+                  .ball-element { animation: kickBall 8s infinite; }
+                  .right-leg { animation: legSwing 0.8s infinite; }
+                  .right-arm { animation: armSwing 0.8s infinite; }
+                </style>
+              </defs>
+              
+              <!-- Grass field -->
+              <rect width="1200" height="400" fill="#0d7d5e" opacity="0.3"/>
+              
+              <!-- Running kid with ball -->
+              <g class="kid-group">
+                <!-- Right leg (kicking) -->
+                <line x1="100" y1="120" x2="100" y2="180" stroke="#333" stroke-width="8" stroke-linecap="round" class="right-leg"/>
+                <!-- Left leg (stationary) -->
+                <line x1="85" y1="120" x2="85" y2="180" stroke="#444" stroke-width="8" stroke-linecap="round"/>
+                <!-- Body -->
+                <ellipse cx="92" cy="90" rx="16" ry="35" fill="#e74c3c"/>
+                <!-- Head -->
+                <circle cx="92" cy="50" r="12" fill="#f5a962"/>
+                <!-- Eyes -->
+                <circle cx="88" cy="48" r="2" fill="#000"/>
+                <circle cx="96" cy="48" r="2" fill="#000"/>
+                <!-- Right arm (swinging) -->
+                <line x1="92" y1="85" x2="110" y2="65" stroke="#f5a962" stroke-width="6" stroke-linecap="round" class="right-arm"/>
+                <!-- Left arm -->
+                <line x1="92" y1="85" x2="75" y2="75" stroke="#f5a962" stroke-width="6" stroke-linecap="round"/>
+              </g>
+              
+              <!-- Soccer ball -->
+              <g class="ball-element">
+                <circle cx="150" cy="150" r="14" fill="#fff" stroke="#000" stroke-width="1"/>
+                <!-- Pentagon pattern -->
+                <path d="M 150 140 L 156 143 L 154 150 L 146 150 L 144 143 Z" fill="#000"/>
+                <path d="M 150 160 L 156 157 L 158 164 L 150 168 L 142 164 Z" fill="#000"/>
+              </g>
+              
+              <!-- Distant trees (parallax effect) -->
+              <g opacity="0.2">
+                <polygon points="50,250 30,150 70,150" fill="#047857"/>
+                <rect x="45" y="250" width="10" height="40" fill="#5d4e37"/>
+                <polygon points="200,280 170,180 230,180" fill="#047857"/>
+                <rect x="195" y="280" width="10" height="40" fill="#5d4e37"/>
+                <polygon points="900,270 870,160 930,160" fill="#047857"/>
+                <rect x="895" y="270" width="10" height="50" fill="#5d4e37"/>
+              </g>
+            </svg>
+
+            <div class="max-w-4xl mx-auto text-center relative z-10">
               <h2 class="text-4xl md:text-5xl font-bold mb-4">${t('findFields')}</h2>
               <p class="text-lg text-emerald-100 mb-8">${t('description')}</p>
               <button onclick="currentPage='fields';render()" class="btn-primary text-white px-8 py-3 rounded-xl font-semibold text-lg">
@@ -710,9 +790,7 @@
             </div>
           </section>
 
-          <section class="py-8 px-4 bg-amber-50 border-t-2 border-amber-200 text-center">
-            <p class="text-amber-900 text-sm font-medium">${t('demoMode')}</p>
-          </section>
+
         </div>
       `;
     }
@@ -721,6 +799,7 @@
       const allFields = [...seedFields, ...appData.fields].filter(f => f.approved && f.active);
       const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
       
+      const searchKeyword = document.getElementById('search-keyword')?.value?.toLowerCase() || '';
       const selectedEmirate = document.getElementById('emirate-filter')?.value || '';
       const selectedArea = document.getElementById('area-filter')?.value || '';
       const selectedPrice = document.getElementById('price-filter')?.value || '';
@@ -728,6 +807,19 @@
       const availableAreas = selectedEmirate ? uaeData[selectedEmirate] || [] : [];
       
       let filteredFields = allFields;
+      
+      // Search by keyword
+      if (searchKeyword) {
+        filteredFields = filteredFields.filter(f => 
+          f.fieldName.toLowerCase().includes(searchKeyword) ||
+          f.area.toLowerCase().includes(searchKeyword) ||
+          f.emirate.toLowerCase().includes(searchKeyword) ||
+          f.amenities.toLowerCase().includes(searchKeyword) ||
+          f.description.toLowerCase().includes(searchKeyword) ||
+          f.pitchSize.toLowerCase().includes(searchKeyword)
+        );
+      }
+      
       if (selectedEmirate) {
         filteredFields = filteredFields.filter(f => f.emirate === selectedEmirate);
       }
@@ -742,6 +834,11 @@
         <div class="max-w-6xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
           <div class="mb-6">
             <h2 class="text-2xl font-bold mb-4">${t('browse')}</h2>
+            
+            <div class="mb-4">
+              <input type="text" id="search-keyword" onchange="render()" oninput="render()" placeholder="🔍 Search by field name, area, amenities..." value="${searchKeyword}" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-600 font-medium">
+            </div>
+            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <select id="emirate-filter" onchange="render()" class="px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-600">
                 <option value="">${t('selectEmirate')}</option>
@@ -763,11 +860,15 @@
             ` : filteredFields.map(field => `
               <div class="bg-white rounded-xl overflow-hidden shadow-md card-hover border border-slate-100 cursor-pointer" onclick="document.body.dataset.selectedFieldId='${field.id}';currentPage='field-details';render()">
                 <div class="h-48 bg-slate-100 flex items-center justify-center overflow-hidden">
-                  ${generatePitchSVG(field.pitchSvg)}
+                  ${field.photoUrl ? `
+                    <img src="${field.photoUrl}" alt="${field.fieldName}" loading="lazy" class="w-full h-full object-cover" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+                  ` : `
+                    ${generatePitchSVG(field.pitchSvg)}
+                  `}
                 </div>
                 <div class="p-5">
                   <h4 class="font-bold text-lg mb-2">${field.fieldName}</h4>
-                  <p class="text-slate-500 text-sm mb-3">📍 ${field.area}, ${field.emirate}</p>
+                  <p class="text-slate-500 text-sm mb-3">��� ${field.area}, ${field.emirate}</p>
                   <div class="flex items-center justify-between text-xs text-slate-600 mb-3">
                     <span>${field.pitchSize}</span>
                     <span>${field.indoor ? t('indoor') : t('outdoor')}</span>
@@ -811,36 +912,45 @@
       
       return `
         <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
-          <button onclick="currentPage='fields';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '→' : '←'} ${t('back')}</button>
+          <button onclick="currentPage='fields';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '���' : '���'} ${t('back')}</button>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="md:col-span-2">
-              <div class="h-64 bg-slate-100 rounded-xl flex items-center justify-center mb-6 overflow-hidden">
-                ${generatePitchSVG(field.pitchSvg)}
-              </div>
+            <div class="h-48 bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center">
+              ${field.photoUrl ? `
+                <img src="${field.photoUrl}" alt="${field.fieldName}" loading="lazy" class="w-full h-full object-cover" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+              ` : `
+                <div class="w-full h-full flex items-center justify-center">
+                  ${generatePitchSVG(field.pitchSvg)}
+                </div>
+              `}
+            </div>
               
               <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
                 <h2 class="text-3xl font-bold mb-2">${field.fieldName}</h2>
                 <p class="text-slate-500 mb-4">📍 ${field.address}, ${field.area}, ${field.emirate}</p>
                 <p class="text-slate-700 mb-4">${field.description}</p>
                 
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <p class="text-sm text-slate-500">${t('pitchSizeRequired')}</p>
-                    <p class="font-semibold">${field.pitchSize}</p>
-                  </div>
-                  <div>
-                    <p class="text-sm text-slate-500">${t('turf')}</p>
-                    <p class="font-semibold">${field.turfType}</p>
+                <div class="space-y-4 mb-4">
+                  <div class="grid grid-cols-2 gap-4">
+                    <div>
+                      <p class="text-sm text-slate-500">${t('pitchSizeRequired')}</p>
+                      <p class="font-semibold">${field.pitchSize}</p>
+                    </div>
+                    <div>
+                      <p class="text-sm text-slate-500">${t('turf')}</p>
+                      <p class="font-semibold">${field.turfType}</p>
+                    </div>
                   </div>
                   <div>
                     <p class="text-sm text-slate-500">${t('amenities')}</p>
-                    <p class="font-semibold text-sm">${field.amenities}</p>
+                    <p class="font-semibold text-sm line-clamp-2">${field.amenities}</p>
                   </div>
                   <div>
                     <p class="text-sm text-slate-500">${t('rules')}</p>
-                    <p class="font-semibold text-sm">${field.rules}</p>
+                    <p class="font-semibold text-sm line-clamp-2">${field.rules}</p>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -1081,7 +1191,7 @@
       return `
         <div class="max-w-2xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
           <div class="bg-white rounded-xl p-8 shadow-lg text-center">
-            <div class="text-5xl mb-4">✅</div>
+            <div class="text-5xl mb-4">��</div>
             <h2 class="text-3xl font-bold mb-2">${t('bookingConfirmed')}</h2>
             
             <div class="bg-emerald-50 rounded-xl p-6 my-6">
@@ -1534,7 +1644,7 @@
         <div class="min-h-[80vh] flex items-center justify-center px-4 py-12 animate-fadeIn" dir="${dir}">
           <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
             <div class="text-center mb-8">
-              <div class="text-5xl mb-4">⚽</div>
+              <div class="text-5xl mb-4">���</div>
               <h2 class="text-2xl font-bold">${isLogin ? t('login') : t('signup')}</h2>
             </div>
 
@@ -1588,6 +1698,362 @@
       `;
     }
 
+    function renderFooter() {
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      const pendingNotices = 3; // Demo: showing 3 pending notices
+      
+      return `
+        <footer class="bg-slate-900 text-white mt-16" dir="${dir}">
+          <div class="max-w-6xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+              <div>
+                <h3 class="font-bold mb-4">HajzKoora</h3>
+                <p class="text-slate-400 text-sm">${t('tagline')}</p>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold mb-3">Quick Links</h4>
+                <ul class="space-y-2 text-sm text-slate-400">
+                  <li><a href="#" onclick="currentPage='fields';render()" class="hover:text-white">${t('fields')}</a></li>
+                  <li><a href="#" onclick="currentPage='landing';render()" class="hover:text-white">${t('forOwners')}</a></li>
+                  <li><a href="#" onclick="currentPage='support';render()" class="hover:text-white">${t('support')}</a></li>
+                  <li><a href="#" class="hover:text-white">${t('about')}</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-3">Legal</h4>
+                <ul class="space-y-2 text-sm text-slate-400">
+                  <li><a href="#" onclick="currentPage='privacy';render()" class="hover:text-white">Privacy Policy</a></li>
+                  <li><a href="#" onclick="currentPage='terms';render()" class="hover:text-white">${t('terms')}</a></li>
+                  <li><a href="#" class="hover:text-white">Cookie Policy</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-3">Notices</h4>
+                <div class="relative inline-block">
+                  <button onclick="currentPage='notices';render()" class="flex items-center gap-2 text-emerald-400 hover:text-emerald-300">
+                    <span class="text-2xl">+</span>
+                    <div class="absolute -top-2 right-0 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
+                      ${pendingNotices}
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-slate-700 pt-8">
+              <p class="text-slate-400 text-sm text-center">${t('copyright')}</p>
+            </div>
+          </div>
+        </footer>
+      `;
+    }
+
+    function renderPrivacy() {
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      return `
+        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <button onclick="currentPage='landing';render()" class="mb-4 text-emerald-600 font-semibold">← ${t('back')}</button>
+          
+          <div class="bg-white rounded-xl p-8 shadow-sm">
+            <h1 class="text-3xl font-bold mb-6">Privacy Policy</h1>
+            
+            <div class="space-y-6 text-slate-700">
+              <section>
+                <h2 class="text-xl font-semibold mb-2">1. Information We Collect</h2>
+                <p>HajzKoora collects information you provide directly, including name, email, phone number, and payment details. We also collect usage data through cookies and analytics.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">2. How We Use Your Information</h2>
+                <p>Your information is used to provide and improve our services, process bookings, handle payments, and communicate with you about your account and bookings.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">3. Data Protection</h2>
+                <p>We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">4. Third-Party Sharing</h2>
+                <p>We do not sell your personal information. We may share data with service providers who assist in our operations under strict confidentiality agreements.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">5. Your Rights</h2>
+                <p>You have the right to access, correct, or delete your personal information. Contact us at privacy@hajzkoora.ae for any requests.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">6. Contact Us</h2>
+                <p>For privacy concerns, contact our Data Protection Officer at privacy@hajzkoora.ae</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTerms() {
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      return `
+        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <button onclick="currentPage='landing';render()" class="mb-4 text-emerald-600 font-semibold">← ${t('back')}</button>
+          
+          <div class="bg-white rounded-xl p-8 shadow-sm">
+            <h1 class="text-3xl font-bold mb-6">Terms & Conditions</h1>
+            
+            <div class="space-y-6 text-slate-700">
+              <section>
+                <h2 class="text-xl font-semibold mb-2">1. Acceptance of Terms</h2>
+                <p>By using HajzKoora, you agree to these terms and conditions. If you do not agree, please do not use our services.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">2. User Responsibilities</h2>
+                <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities conducted under your account.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">3. Booking & Cancellation</h2>
+                <p>Bookings can be cancelled up to 24 hours before the scheduled time for a full refund. Cancellations within 24 hours may incur penalties.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">4. Payment Terms</h2>
+                <p>All payments must be completed before the booking is confirmed. We accept all major credit cards and digital payment methods.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">5. Liability Disclaimer</h2>
+                <p>HajzKoora is provided "as is". We are not liable for injuries, accidents, or damages occurring at field facilities.</p>
+              </section>
+
+              <section>
+                <h2 class="text-xl font-semibold mb-2">6. Changes to Terms</h2>
+                <p>We reserve the right to modify these terms at any time. Changes will be effective upon posting to the platform.</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderNotices() {
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      
+      const notices = [
+        { id: 1, title: 'Peak Hours Alert', message: 'High demand on weekends 4-7 PM. Book early for availability.', date: '2 hours ago', icon: '📢' },
+        { id: 2, title: 'Maintenance Notification', message: 'Indoor Arena Sharjah will be closed for maintenance on 15th Dec.', date: '1 day ago', icon: '🔧' },
+        { id: 3, title: 'New Field Added', message: 'Marina Sports Lounge now available for bookings in Dubai.', date: '3 days ago', icon: '⭐' }
+      ];
+      
+      return `
+        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <button onclick="currentPage='landing';render()" class="mb-4 text-emerald-600 font-semibold">${dir === 'rtl' ? '→' : '�����'} Back</button>
+          
+          <h1 class="text-3xl font-bold mb-6">Notices & Announcements</h1>
+          
+          <div class="space-y-4">
+            ${notices.map(notice => `
+              <div class="bg-white rounded-xl p-6 shadow-sm border-l-4 border-emerald-600">
+                <div class="flex items-start gap-4">
+                  <div class="text-3xl">${notice.icon}</div>
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg mb-1">${notice.title}</h3>
+                    <p class="text-slate-600 mb-2">${notice.message}</p>
+                    <p class="text-xs text-slate-500">${notice.date}</p>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSupport() {
+      const dir = currentLanguage === 'ar' || currentLanguage === 'ur' ? 'rtl' : 'ltr';
+      const supportMessages = JSON.parse(sessionStorage.getItem('support-chat') || '[]');
+      
+      const faqItems = [
+        { q: 'How do I book a field?', a: 'Browse available fields, select your date and time, and complete the payment.' },
+        { q: 'Can I cancel my booking?', a: 'Yes, cancel up to 24 hours before for a full refund.' },
+        { q: 'What payment methods are accepted?', a: 'We accept credit cards and digital wallets.' },
+        { q: 'How do I list my field?', a: 'Sign up as a field owner and submit your field details for approval.' }
+      ];
+      
+      return `
+        <div class="max-w-4xl mx-auto px-4 py-8 animate-fadeIn" dir="${dir}">
+          <button onclick="currentPage='landing';render()" class="mb-4 text-emerald-600 font-semibold">← ${t('back')}</button>
+          
+          <h1 class="text-3xl font-bold mb-8">Live Support</h1>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Chat Section -->
+            <div class="lg:col-span-2">
+              <div class="bg-white rounded-xl overflow-hidden shadow-lg flex flex-col h-[600px]">
+                <!-- Header -->
+                <div class="gradient-bg text-white p-4 flex items-center gap-3">
+                  <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center text-xl">��</div>
+                  <div>
+                    <h3 class="font-bold">HajzKoora Support</h3>
+                    <p class="text-xs text-emerald-100">�������� Online - Average response: 2 min</p>
+                  </div>
+                </div>
+
+                <!-- Messages -->
+                <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+                  ${supportMessages.length === 0 ? `
+                    <div class="text-center py-12 text-slate-400">
+                      <div class="text-4xl mb-2">👋</div>
+                      <p>Welcome to HajzKoora Support!</p>
+                      <p class="text-sm mt-2">How can we help you today?</p>
+                    </div>
+                  ` : supportMessages.map((msg, idx) => `
+                    <div class="flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}">
+                      <div class="max-w-xs ${msg.sender === 'user' ? 'bg-emerald-600 text-white rounded-bl-xl' : 'bg-white text-slate-800 rounded-br-xl border border-slate-200'} p-3 rounded-xl">
+                        <p class="text-sm">${msg.text}</p>
+                        <p class="text-xs ${msg.sender === 'user' ? 'text-emerald-100' : 'text-slate-400'} mt-1">${new Date(msg.time).toLocaleTimeString()}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+
+                <!-- Input -->
+                <div class="border-t border-slate-200 p-4 bg-white">
+                  <form onsubmit="sendSupportMessage(event)" class="flex gap-2">
+                    <input type="text" id="support-message" placeholder="Type your message..." class="flex-1 px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-600" required>
+                    <button type="submit" class="btn-primary text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">
+                      ���
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ & Info -->
+            <div class="lg:col-span-1">
+              <div class="space-y-4">
+                <!-- Quick Info -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-4 border-l-4 border-emerald-600">
+                  <h4 class="font-bold mb-2">�� Contact Info</h4>
+                  <p class="text-sm text-slate-700 mb-2">
+                    <strong>Email:</strong><br/>
+                    HajzkooraAE@gmail.com
+                  </p>
+                  <p class="text-sm text-slate-700">
+                    <strong>Phone:</strong><br/>
+                    +971 50 182 6992
+                  </p>
+                </div>
+
+                <!-- Support Hours -->
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-emerald-200">
+                  <h4 class="font-bold mb-3 flex items-center gap-2">
+                    <span>🕐</span> Support Hours
+                  </h4>
+                  <ul class="space-y-2 text-sm text-slate-600">
+                    <li><strong>Monday - Friday:</strong> 8 AM - 8 PM</li>
+                    <li><strong>Saturday:</strong> 9 AM - 6 PM</li>
+                    <li><strong>Sunday:</strong> 9 AM - 5 PM</li>
+                    <li class="text-xs text-emerald-600 pt-2">🟢 Currently Online</li>
+                  </ul>
+                </div>
+
+                <!-- FAQ Toggle -->
+                <button onclick="toggleFAQ()" class="w-full bg-white rounded-xl p-4 shadow-sm border border-slate-200 text-left font-bold hover:bg-slate-50 transition-colors">
+                  ❓ FAQ (${faqItems.length})
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Section -->
+          <div id="faq-section" class="hidden mt-8">
+            <h3 class="text-2xl font-bold mb-4">Frequently Asked Questions</h3>
+            <div class="space-y-3">
+              ${faqItems.map((item, idx) => `
+                <details class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm cursor-pointer">
+                  <summary class="px-6 py-4 font-semibold text-emerald-600 hover:bg-emerald-50 flex items-center justify-between">
+                    <span>${item.q}</span>
+                    <span class="text-lg">+</span>
+                  </summary>
+                  <div class="px-6 py-4 bg-slate-50 text-slate-700 border-t border-slate-200">
+                    ${item.a}
+                  </div>
+                </details>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function sendSupportMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('support-message');
+      const text = input.value.trim();
+      
+      if (!text) return;
+      
+      const messages = JSON.parse(sessionStorage.getItem('support-chat') || '[]');
+      
+      // Add user message
+      messages.push({
+        sender: 'user',
+        text: text,
+        time: new Date().toISOString()
+      });
+      
+      // Add auto-reply after a short delay
+      setTimeout(() => {
+        const replies = [
+          'Thanks for reaching out! 😊',
+          'We\'re here to help!',
+          'I\'ll check that for you.',
+          'Great question! Let me find that info.',
+          'We appreciate your feedback! 🙌'
+        ];
+        
+        messages.push({
+          sender: 'agent',
+          text: replies[Math.floor(Math.random() * replies.length)],
+          time: new Date().toISOString()
+        });
+        
+        sessionStorage.setItem('support-chat', JSON.stringify(messages));
+        render();
+        
+        // Auto-scroll to bottom
+        setTimeout(() => {
+          const chatBox = document.querySelector('[class*="overflow-y-auto"]');
+          if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        }, 0);
+      }, 800);
+      
+      sessionStorage.setItem('support-chat', JSON.stringify(messages));
+      input.value = '';
+      render();
+      
+      // Auto-scroll to bottom
+      setTimeout(() => {
+        const chatBox = document.querySelector('[class*="overflow-y-auto"]');
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+      }, 0);
+    }
+
+    function toggleFAQ() {
+      const faqSection = document.getElementById('faq-section');
+      if (faqSection) {
+        faqSection.classList.toggle('hidden');
+      }
+    }
+
     function render() {
       const app = document.getElementById('app');
       
@@ -1627,6 +2093,18 @@
         case 'signup':
           content = renderAuth(false);
           break;
+        case 'privacy':
+          content = renderPrivacy();
+          break;
+        case 'terms':
+          content = renderTerms();
+          break;
+        case 'notices':
+          content = renderNotices();
+          break;
+        case 'support':
+          content = renderSupport();
+          break;
         default:
           content = renderLanding();
       }
@@ -1636,6 +2114,7 @@
         <main class="w-full">
           ${content}
         </main>
+        ${renderFooter()}
       `;
     }
 
